@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>타이타닉 생존률 분석 보고서</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --card2:#0f1730;
+      --text:#e7ecff;
+      --muted:#b9c2ff;
+      --line:rgba(231,236,255,.14);
+      --accent:#35d0ba;
+      --accent2:#5aa7ff;
+      --warn:#ffd166;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1100px 600px at 15% 0%, rgba(53,208,186,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(90,167,255,.16), transparent 55%),
+        radial-gradient(900px 600px at 60% 90%, rgba(255,209,102,.10), transparent 60%),
+        linear-gradient(180deg, #070b14, var(--bg));
+    }
+
+    a{color:inherit; text-decoration:none;}
+
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 26px 18px 60px;
+    }
+
+    header{
+      position:relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(17,26,46,.96), rgba(17,26,46,.78));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    header::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 280px at 10% 0%, rgba(53,208,186,.30), transparent 60%),
+        radial-gradient(520px 320px at 90% 10%, rgba(90,167,255,.26), transparent 60%);
+      pointer-events:none;
+      filter: blur(0.2px);
+    }
+
+    .hero{
+      position:relative;
+      padding: 28px 26px 18px;
+      display:flex;
+      gap: 18px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .title{
+      min-width: 260px;
+      flex: 1 1 520px;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.3px;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15,23,48,.55);
+      backdrop-filter: blur(6px);
+    }
+
+    .pill b{color:var(--text); font-weight:650;}
+
+    .quick{
+      flex: 0 1 420px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      min-width: 280px;
+    }
+
+    .stat{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15,23,48,.55);
+      padding: 12px 12px 10px;
+    }
+
+    .stat .k{
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .stat .v{
+      font-family: var(--mono);
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+
+    nav{
+      position:relative;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      padding: 0 18px 18px;
+    }
+
+    nav a{
+      border: 1px solid var(--line);
+      background: rgba(15,23,48,.40);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+
+    nav a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(53,208,186,.55);
+      background: rgba(15,23,48,.65);
+      color: var(--text);
+    }
+
+    main{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    section{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(17,26,46,.92), rgba(17,26,46,.70));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .sec-h{
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+
+    .sec-h h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .sec-h .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: rgba(15,23,48,.55);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .sec-b{padding: 14px 18px 18px;}
+
+    p{margin:0 0 10px; line-height: 1.75; color: rgba(231,236,255,.92);}
+    .muted{color: rgba(185,194,255,.92);}
+
+    .callout{
+      border: 1px solid rgba(53,208,186,.35);
+      background: linear-gradient(180deg, rgba(53,208,186,.10), rgba(15,23,48,.45));
+      border-radius: 16px;
+      padding: 14px 14px;
+      margin: 12px 0 6px;
+    }
+
+    .callout .t{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(53,208,186,.12);
+    }
+
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap: 12px;}
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px;}
+
+    @media (max-width: 860px){
+      .grid2{grid-template-columns: 1fr;}
+      .grid3{grid-template-columns: 1fr;}
+      .quick{grid-template-columns: repeat(2, minmax(0, 1fr));}
+    }
+
+    table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15,23,48,.35);
+    }
+
+    th,td{
+      padding: 12px 12px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      text-align:left;
+      font-size: 14px;
+      color: rgba(231,236,255,.92);
+      vertical-align: top;
+    }
+
+    th{
+      background: rgba(15,23,48,.70);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    tr:last-child td{border-bottom: 0;}
+    th:last-child, td:last-child{border-right: 0;}
+
+    ul{margin: 8px 0 0; padding-left: 18px;}
+    li{margin: 6px 0; line-height: 1.7; color: rgba(231,236,255,.92);}
+
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(7,11,20,.45);
+      color: rgba(231,236,255,.92);
+    }
+
+    footer{
+      margin-top: 18px;
+      color: rgba(185,194,255,.85);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    .hr{
+      height: 1px;
+      background: var(--line);
+      margin: 12px 0;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(90,167,255,.35);
+      background: linear-gradient(180deg, rgba(90,167,255,.12), rgba(15,23,48,.40));
+      color: rgba(231,236,255,.95);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .badge .b{width:8px; height:8px; border-radius:999px; background: var(--accent2); box-shadow:0 0 0 5px rgba(90,167,255,.12);}
+
+    .pred{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .pred-card{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(15,23,48,.40);
+    }
+
+    .pred-card h3{
+      margin:0 0 10px;
+      font-size: 15px;
+    }
+
+    .pred-card .row{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(231,236,255,.14);
+    }
+
+    .pred-card .row:last-child{border-bottom:0;}
+    .pred-card .k{color: var(--muted);}
+
+    .result{
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,102,.28);
+      background: linear-gradient(180deg, rgba(255,209,102,.10), rgba(15,23,48,.35));
+      padding: 12px;
+    }
+
+    .result b{color: var(--text);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="hero">
+        <div class="title">
+          <h1>타이타닉 생존률 분석 보고서</h1>
+          <div class="meta">
+            <span class="pill"><b>등록일자</b> <span class="kbd">2026.01</span></span>
+            <span class="pill"><b>분석 주제</b> 타이타닉 생존률 분석</span>
+            <span class="pill"><b>데이터</b> 418행 × 8열</span>
+          </div>
+          <div class="callout" style="margin-top:12px;">
+            <div class="t"><span class="dot"></span>요약</div>
+            <p class="muted">
+              생존 여부는 단일 변수로 설명되기보다 <b>성별</b>, <b>객실 등급</b>, <b>요금</b> 등 여러 변수의 결합에 의해 좌우되는 경향이 강하다.
+              본 웹페이지는 공공 데이터 분석 보고서 형식에 맞추어 분석 목적, 활용 데이터, 분석 과정, 분석 결과, 한계점 및 결론 순으로 정리하였다.
+            </p>
+          </div>
+        </div>
+
+        <div class="quick" aria-label="핵심 수치">
+          <div class="stat">
+            <div class="k">관측치(행)</div>
+            <div class="v">418</div>
+          </div>
+          <div class="stat">
+            <div class="k">변수(열)</div>
+            <div class="v">8</div>
+          </div>
+          <div class="stat">
+            <div class="k">타깃 변수</div>
+            <div class="v">Survived</div>
+          </div>
+          <div class="stat">
+            <div class="k">결측치 처리</div>
+            <div class="v">Age·Sex</div>
+          </div>
+          <div class="stat">
+            <div class="k">이상치 탐지</div>
+            <div class="v">IQR</div>
+          </div>
+          <div class="stat">
+            <div class="k">예측 모델</div>
+            <div class="v">LogReg</div>
+          </div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#sec1">1. 목적 & 배경</a>
+        <a href="#sec2">2. 활용 데이터</a>
+        <a href="#sec3">3. 분석 과정</a>
+        <a href="#sec4">4. 분석 결과</a>
+        <a href="#sec5">5. 한계점 & 결론</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <section id="sec1">
+        <div class="sec-h">
+          <h2>1. 분석 목적 & 배경</h2>
+          <span class="tag">Problem Definition</span>
+        </div>
+        <div class="sec-b">
+          <p>
+            본 분석은 타이타닉 승객 데이터를 활용하여 생존 여부에 영향을 미치는 주요 요인을 체계적으로 분석하고,
+            데이터에 내재된 패턴을 통해 생존 구조를 이해하는 것을 목적으로 한다. 단순한 생존 여부 예측을 넘어서,
+            당시의 사회적·경제적 조건과 개인 특성이 생존에 어떠한 영향을 미쳤는지를 탐색하는 데 중점을 두었다.
+          </p>
+          <p class="muted">
+            본 보고서는 공공 데이터 분석 사례 템플릿 구조를 참고하여 작성되었으며, 분석 목적 → 활용 데이터 → 분석 과정 → 분석 결과 → 한계점 및 결론의 흐름으로 구성하였다.
+          </p>
+        </div>
+      </section>
+
+      <section id="sec2">
+        <div class="sec-h">
+          <h2>2. 활용 데이터</h2>
+          <span class="tag">Dataset</span>
+        </div>
+        <div class="sec-b">
+          <p>
+            본 분석에 활용한 데이터는 타이타닉 호에 탑승한 승객들의 개인 정보 및 탑승 정보를 포함한 공개 데이터이다.
+          </p>
+
+          <div class="grid2">
+            <div>
+              <h3 style="margin:0 0 10px; font-size:15px;">데이터 개요</h3>
+              <table>
+                <thead>
+                  <tr><th>구분</th><th>내용</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>데이터 크기</td><td>418행 × 8열</td></tr>
+                  <tr><td>분석 단위</td><td>개별 승객</td></tr>
+                  <tr><td>분석 기간</td><td>1912년 타이타닉 사고 당시</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <h3 style="margin:0 0 10px; font-size:15px;">주요 변수</h3>
+              <table>
+                <thead>
+                  <tr><th>변수 유형</th><th>변수명</th><th>설명</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>수치형 데이터</td><td>Pclass</td><td>객실 등급 (1, 2, 3)</td></tr>
+                  <tr><td>수치형 데이터</td><td>Age</td><td>승객 나이</td></tr>
+                  <tr><td>수치형 데이터</td><td>SibSp</td><td>동승한 형제·배우자 수</td></tr>
+                  <tr><td>수치형 데이터</td><td>Parch</td><td>동승한 부모·자녀 수</td></tr>
+                  <tr><td>수치형 데이터</td><td>Fare</td><td>요금</td></tr>
+                  <tr><td>범주형 데이터</td><td>Sex</td><td>성별</td></tr>
+                  <tr><td>범주형 데이터</td><td>Embarked</td><td>승선 항구</td></tr>
+                  <tr><td>타깃 변수</td><td>Survived</td><td>생존 여부 (0 = 사망, 1 = 생존)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="callout">
+            <div class="t"><span class="dot"></span>데이터 적합성</div>
+            <p class="muted">
+              개인의 성별, 연령, 사회적 지위, 가족 동반 여부 등 다양한 특성을 포함하고 있어 생존 요인 분석에 적합한 구조를 가진다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec3">
+        <div class="sec-h">
+          <h2>3. 분석 과정</h2>
+          <span class="tag">Workflow</span>
+        </div>
+        <div class="sec-b">
+          <div class="grid2">
+            <div>
+              <span class="badge"><span class="b"></span>3.1 데이터 전처리</span>
+              <div class="hr"></div>
+              <h3 style="margin:0 0 8px; font-size:15px;">결측치 처리</h3>
+              <ul>
+                <li><b>Age</b>: 결측치(약 20%)를 결측 제외 평균값으로 대체</li>
+                <li><b>Sex</b>: 소수 결측치를 최빈값(<span class="kbd">male</span>)으로 대체</li>
+                <li>그 외 변수는 결측치가 발견되지 않음</li>
+              </ul>
+
+              <div class="hr"></div>
+              <h3 style="margin:0 0 8px; font-size:15px;">이상치 탐지</h3>
+              <ul>
+                <li>IQR 기준 이상치 탐지 결과 <b>Fare</b>, <b>SibSp</b>, <b>Parch</b>에서 극단값 확인</li>
+                <li>입력 오류가 아닌 실제 상황을 반영한 값으로 판단하여 제거하지 않음</li>
+                <li>Fare는 분포 왜도가 커 이후 로그 변환 등을 고려 가능</li>
+              </ul>
+            </div>
+
+            <div>
+              <span class="badge"><span class="b"></span>3.2 EDA 및 시각화</span>
+              <div class="hr"></div>
+              <p class="muted">
+                일변량/다변량 EDA를 통해 변수 분포, 집단 간 차이, 변수 조합 효과를 점검했다.
+                특히 생존 여부는 단일 수치형 변수와의 선형 상관이 약하므로, <b>성별·객실등급</b> 등 범주형 변수와의 결합 관찰이 중요하다.
+              </p>
+              <div class="callout" style="margin-top:12px;">
+                <div class="t"><span class="dot"></span>분석 원칙</div>
+                <p class="muted">
+                  통계적 이상치는 반드시 오류를 뜻하지 않으며, 역사적·도메인 맥락을 고려해 처리 여부를 결정한다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec4">
+        <div class="sec-h">
+          <h2>4. 분석 결과</h2>
+          <span class="tag">Findings</span>
+        </div>
+        <div class="sec-b">
+
+          <div class="grid2">
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">4-1. 생존 여부 현황 분석</h3>
+              <p>
+                전체 승객 중 사망자가 생존자보다 많아 생존 여부에 클래스 불균형이 존재하였다.
+                이는 당시 재난 상황에서 구조 우선순위가 일부 집단에 집중되었음을 시사한다.
+              </p>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">4-2. 성별 및 객실 등급별 특징 분석</h3>
+              <p>
+                여성 승객의 생존율이 남성보다 현저히 높게 나타났다.
+                객실 등급별로는 1등석 승객의 생존율이 가장 높고, 3등석 승객의 생존율이 가장 낮았다.
+              </p>
+              <p class="muted">
+                특히 여성은 모든 객실 등급에서 상대적으로 높은 생존율을 보였으며,
+                이는 성별과 객실 등급 간 상호작용 효과가 존재함을 보여준다.
+              </p>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="grid2">
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">4-3. 나이 및 요금 특성 분석</h3>
+              <p>
+                나이 변수는 단독으로는 생존 여부와의 상관관계가 크지 않았으나,
+                성별 및 객실 등급과 함께 해석할 때 의미 있는 패턴이 확인되었다.
+              </p>
+              <p class="muted">
+                요금(Fare)은 생존 여부와 약한 양의 상관을 보였으며, 사회·경제적 지위를 간접적으로 반영하는 변수로 해석된다.
+              </p>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">4-4. 수치형 변수 상관관계 분석</h3>
+              <p>
+                수치형 변수 간 상관관계 분석 결과, Fare와 Pclass 간에는 강한 음의 상관관계가 존재하였다.
+                반면, 생존 여부는 단일 수치형 변수와의 선형 관계보다는 여러 변수의 조합에 의해 설명되는 경향이 강하였다.
+              </p>
+              <div class="callout" style="margin-top:10px;">
+                <div class="t"><span class="dot"></span>해석 포인트</div>
+                <p class="muted">
+                  <b>Pclass</b>는 사회·경제적 지위와 접근성을,
+                  <b>Fare</b>는 그 지위를 연속값으로 반영하는 경향이 있어 함께 해석할 때 맥락이 선명해진다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <h3 style="margin:0 0 10px; font-size:15px;">4-5. 예측 사례 분석</h3>
+          <p class="muted">
+            전처리된 데이터를 기반으로 로지스틱 회귀 모델을 학습한 뒤, 특정 조건의 승객에 대해 생존 여부를 예측하였다.
+            아래 사례들은 변수 조합이 예측 결과에 어떻게 영향을 주는지 비교·대조하기 위한 예시이다.
+          </p>
+
+          <div class="pred">
+            <div class="pred-card">
+              <h3>사례 1</h3>
+              <div class="row"><div class="k">Pclass</div><div>3</div></div>
+              <div class="row"><div class="k">Sex</div><div>Female</div></div>
+              <div class="row"><div class="k">Age</div><div>35</div></div>
+              <div class="row"><div class="k">SibSp</div><div>0</div></div>
+              <div class="row"><div class="k">Parch</div><div>0</div></div>
+              <div class="row"><div class="k">Fare</div><div>7.8292</div></div>
+              <div class="row"><div class="k">Embarked</div><div>Q</div></div>
+              <div class="result">
+                <div><b>예측:</b> 생존(1)</div>
+                <div class="muted" style="margin-top:6px;">해석: 여성이라는 요인이 3등석의 불리함을 상쇄하는 방향으로 작용한 것으로 볼 수 있다.</div>
+              </div>
+            </div>
+
+            <div class="pred-card">
+              <h3>사례 2</h3>
+              <div class="row"><div class="k">Pclass</div><div>2</div></div>
+              <div class="row"><div class="k">Sex</div><div>Male</div></div>
+              <div class="row"><div class="k">Age</div><div>22</div></div>
+              <div class="row"><div class="k">SibSp</div><div>0</div></div>
+              <div class="row"><div class="k">Parch</div><div>0</div></div>
+              <div class="row"><div class="k">Fare</div><div>10</div></div>
+              <div class="row"><div class="k">Embarked</div><div>S</div></div>
+              <div class="result">
+                <div><b>예측:</b> 사망(0)</div>
+                <div class="muted" style="margin-top:6px;">해석: 남성이라는 특성과 중간 객실 등급, 낮은 요금 조건이 결합되며 생존 확률을 낮추는 방향으로 작용한 것으로 해석된다.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="sec5">
+        <div class="sec-h">
+          <h2>5. 한계점 및 결론</h2>
+          <span class="tag">Limitations & Conclusion</span>
+        </div>
+        <div class="sec-b">
+          <div class="grid2">
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">한계점</h3>
+              <p>
+                본 분석은 비교적 제한된 변수와 표본을 사용하였다는 점에서 한계가 존재한다.
+                특히 사고 당시의 실제 위치 정보나 구조 순서와 같은 추가 정보가 포함되지 않아
+                생존 원인을 완전하게 설명하는 데에는 제약이 있다.
+              </p>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px; font-size:15px;">결론</h3>
+              <p>
+                타이타닉 생존 구조는 성별, 객실 등급, 사회·경제적 지위 등의 복합적인 요인에 의해 결정되는 경향이 강함을 확인하였다.
+                이러한 결과는 향후 재난 대응 정책이나 데이터 기반 의사결정 연구에 기초 자료로 활용될 수 있을 것이다.
+              </p>
+              <div class="callout" style="margin-top:10px;">
+                <div class="t"><span class="dot"></span>확장 방향</div>
+                <ul>
+                  <li><b>파생변수</b> (예: FamilySize, IsAlone) 추가</li>
+                  <li>여러 모델(트리 계열 등) 적용 후 성능 비교</li>
+                  <li>요금(Fare) 변환(로그 등)으로 왜도 완화</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>© 2026 Titanic Survival Analysis. 이 페이지는 보고서 내용을 웹 문서 형태로 재구성한 결과물입니다.</div>
+    </footer>
+
+  </div>
+</body>
+</html>
