@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>삼성전자 주가 데이터 분석 보고서</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --soft:#f8fafc;
+      --soft2:#f3f4f6;
+      --accent:#0f766e;
+      --accent2:#115e59;
+      --shadow: 0 10px 30px rgba(17,24,39,.08);
+      --radius:16px;
+      --content: 920px;
+      --sidebar: 320px;
+      --gap: 22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      line-height:1.7;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Layout */
+    .app{display:flex; min-height:100vh}
+    aside{
+      width:var(--sidebar);
+      border-right:1px solid var(--line);
+      padding:22px 18px;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow:auto;
+      background:linear-gradient(180deg, #fff, #fff 60%, var(--soft));
+    }
+    main{
+      flex:1;
+      padding:28px 22px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{width:min(var(--content), 100%)}
+
+    /* Sidebar */
+    .brand{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:12px 12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      background:#fff;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      background:var(--accent);
+      margin-top:7px;
+      flex:0 0 auto;
+    }
+    .brand h1{font-size:15px; margin:0 0 4px 0; line-height:1.25}
+    .brand p{margin:0; font-size:12.5px; color:var(--muted)}
+
+    .toc{margin-top:14px}
+    .toc h2{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 10px 0}
+    .toc a{
+      display:block;
+      padding:8px 10px;
+      border-radius:10px;
+      color:#0f172a;
+      font-size:14px;
+      border:1px solid transparent;
+    }
+    .toc a small{color:var(--muted); font-size:12px}
+    .toc a:hover{background:var(--soft2); text-decoration:none}
+    .toc a.active{background:rgba(15,118,110,.08); border-color:rgba(15,118,110,.18)}
+
+    .meta{
+      margin-top:12px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--soft);
+      font-size:12.5px;
+      color:var(--muted);
+    }
+
+    /* Content */
+    .hero{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .hero h1{font-size:28px; line-height:1.25; margin:0 0 8px 0}
+    .hero p{margin:0; color:var(--muted)}
+
+    .grid2{display:grid; grid-template-columns:1.1fr .9fr; gap:var(--gap); margin-top:18px}
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 10px 0; font-size:16px}
+    .card p{margin:0; color:var(--muted)}
+
+    section{margin-top:26px}
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 10px 0;
+    }
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(15,118,110,.08);
+      color:var(--accent2);
+      border:1px solid rgba(15,118,110,.18);
+    }
+    h2{font-size:20px; margin:0}
+    h3{font-size:16px; margin:14px 0 8px 0}
+
+    .callout{
+      border:1px solid rgba(15,118,110,.22);
+      background:rgba(15,118,110,.06);
+      border-radius:14px;
+      padding:14px 14px;
+      margin:12px 0;
+    }
+    .callout b{color:var(--accent2)}
+
+    ul{margin:8px 0 0 20px}
+    li{margin:6px 0}
+
+    /* Figures */
+    figure{
+      margin:14px 0;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      image-rendering:auto;
+    }
+    figcaption{padding:10px 12px; font-size:12.5px; color:var(--muted); background:var(--soft)}
+
+    /* Table */
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px; border:1px solid var(--line);}
+    th, td{padding:10px 12px; text-align:left; font-size:14px; border-bottom:1px solid var(--line)}
+    th{background:var(--soft); font-weight:700}
+    tr:last-child td{border-bottom:none}
+
+    /* Mobile */
+    .topbar{display:none}
+    @media (max-width: 980px){
+      aside{display:none}
+      .topbar{display:flex; position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid var(--line)}
+      .topbar .inner{width:100%; max-width:var(--content); margin:0 auto; padding:12px 14px; display:flex; justify-content:space-between; align-items:center}
+      .btn{border:1px solid var(--line); background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer}
+      main{padding:18px 14px}
+      .grid2{grid-template-columns:1fr}
+      dialog{border:1px solid var(--line); border-radius:16px; width:min(92vw, 520px)}
+      dialog::backdrop{background:rgba(17,24,39,.4)}
+      .modal{padding:14px}
+      .modal h2{font-size:14px}
+    }
+
+    /* Print/PDF */
+    @media print{
+      aside, .topbar, dialog{display:none !important}
+      main{padding:0}
+      .hero, .card, figure{box-shadow:none}
+      a{color:inherit; text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="inner">
+      <div style="display:flex; gap:10px; align-items:center">
+        <span class="dot" aria-hidden="true"></span>
+        <strong style="font-size:14px">삼성전자 EDA 보고서</strong>
+      </div>
+      <button class="btn" id="openToc">목차</button>
+    </div>
+  </div>
+
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <h1>삼성전자 주가 데이터 분석 보고서</h1>
+          <p>일변량/다변량 EDA + 전처리 필요성 + 2026-01-27 종가 예측</p>
+        </div>
+      </div>
+
+      <nav class="toc" aria-label="목차">
+        <h2>Contents</h2>
+        <a href="#c1">Chapter 1 <small>목적 & 배경</small></a>
+        <a href="#c2">Chapter 2 <small>활용 데이터</small></a>
+        <a href="#c3">Chapter 3 <small>전처리 & EDA</small></a>
+        <a href="#c4">Chapter 4 <small>분석 결과</small></a>
+        <a href="#c5">Chapter 5 <small>한계 & 결론</small></a>
+        <a href="#pred">예측 <small>2026-01-27 종가</small></a>
+        <a href="#appendix">부록 <small>시각화 목록</small></a>
+      </nav>
+
+      <div class="meta">
+        <div><b>기간</b>: 2024-12-12 ~ 2025-12-12</div>
+        <div><b>관측치</b>: 243개 거래일</div>
+        <div><b>핵심 예측</b>: 116,700원</div>
+        <div style="margin-top:8px">※ 이 HTML은 <b>이미지 포함(내장)</b>이라, 파일 하나만 열어도 이미지가 깨지지 않습니다.</div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="wrap">
+        <header class="hero" id="top">
+          <h1>삼성전자 주가 데이터 분석 보고서</h1>
+          <p>중학생도 읽을 수 있는 쉬운 설명으로 정리했습니다. (배경 화이트, 가독성 중심)</p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>이 보고서에서 하는 일</h3>
+              <ul>
+                <li>주가가 <b>언제 오르고</b> <b>얼마나 흔들렸는지</b> 그래프로 확인합니다.</li>
+                <li>변수들 사이에 관계가 있는지(상관관계)를 보고, <b>전처리</b>가 왜 필요한지 정리합니다.</li>
+                <li>마지막에 <b>2026-01-27 종가</b>를 간단한 통계 방법으로 예측합니다.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>주의</h3>
+              <p>이 예측은 데이터 흐름을 이용한 “가늠”입니다. 실제 주가는 뉴스, 실적, 금리 등으로 크게 달라질 수 있어요.</p>
+            </div>
+          </div>
+        </header>
+
+        <section id="c1">
+          <div class="section-title"><span class="pill">Chapter 1</span><h2>분석 목적 & 배경</h2></div>
+          <div class="callout"><b>목적</b>: 삼성전자 일별 데이터로 주가 흐름을 이해하고, 마지막에 2026-01-27 종가를 예측합니다.</div>
+          <h3>왜 EDA가 필요할까요?</h3>
+          <ul>
+            <li>주식은 매일 오르내리고, 어떤 구간에서는 흔들림이 커집니다.</li>
+            <li>가격 변수(시가/고가/저가/종가)는 서로 비슷한 정보를 가지고 있어서, 모델에 전부 넣으면 중복이 생길 수 있습니다.</li>
+            <li>그래서 예측 전, 데이터 모양과 관계를 먼저 확인해야 합니다.</li>
+          </ul>
+        </section>
+
+        <section id="c2">
+          <div class="section-title"><span class="pill">Chapter 2</span><h2>활용 데이터</h2></div>
+          <table>
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>파일</td><td>삼성전자.xlsx (Sheet1)</td></tr>
+            <tr><td>기간</td><td>2024-12-12 ~ 2025-12-12</td></tr>
+            <tr><td>개수</td><td>243개 거래일</td></tr>
+            <tr><td>주요 변수</td><td>시가, 고가, 저가, 종가, 대비, 등락률(%), 거래량, 거래대금, 상장주식수</td></tr>
+            <tr><td>결측치/중복</td><td>결측치 없음, 날짜 중복 없음</td></tr>
+          </table>
+        </section>
+
+        <section id="c3">
+          <div class="section-title"><span class="pill">Chapter 3</span><h2>전처리 & EDA 방법</h2></div>
+          <div class="callout">
+            <b>전처리 핵심</b>
+            <ul>
+              <li>날짜를 날짜형으로 바꾸고 시간순으로 정렬</li>
+              <li>거래량/거래대금은 <b>log10</b>로도 확인(큰 값이 튀는 문제 완화)</li>
+              <li>가격 변수 중복(다중공선성) 가능성 점검</li>
+              <li>급등/급락(이상치)이 전체 해석에 미치는 영향 확인</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <b>EDA 구성</b>
+            <ul>
+              <li>일변량: 히스토그램/박스플롯, 종가 시계열</li>
+              <li>다변량: 상관관계 히트맵, 산점도(로그 포함), 산점도 행렬</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="c4">
+          <div class="section-title"><span class="pill">Chapter 4</span><h2>분석 결과</h2></div>
+
+          <h3>4-1. 일변량 EDA(종가 흐름)</h3>
+          <ul>
+            <li>초반(12~6월): 5만 원대 중반에서 횡보</li>
+            <li>중반(7~8월): 6만~7만 원대로 완만한 상승</li>
+            <li>후반(9~11월): 9만~11만 원대로 급상승</li>
+            <li>말미(11월 이후): 10만 원대에서 변동성 증가</li>
+          </ul>
+
+          <figure>
+            <img loading="lazy" alt="삼성전자 종가 추이" src="{{PRICE_URI}}" />
+            <figcaption>그림 1. 삼성전자 종가 변동(2024-12-12 ~ 2025-12-12)</figcaption>
+          </figure>
+
+          <h3>4-2. 다변량 EDA(변수 관계)</h3>
+          <ul>
+            <li>시가/고가/저가/종가는 서로 매우 비슷하게 움직입니다(강한 +상관).</li>
+            <li>거래량과 거래대금은 함께 커지는 경향이 강합니다.</li>
+            <li>등락률은 가격 수준과는 성격이 달라 상관이 상대적으로 약합니다.</li>
+          </ul>
+
+          <figure>
+            <img loading="lazy" alt="상관관계 히트맵" src="{{CORR_URI}}" />
+            <figcaption>그림 2. 수치형 변수 상관관계 히트맵(피어슨)</figcaption>
+          </figure>
+
+          <figure>
+            <img loading="lazy" alt="log10(거래량) vs log10(거래대금) 산점도" src="{{SC_VOL_VAL_URI}}" />
+            <figcaption>그림 3. log10(거래량) vs log10(거래대금) 산점도</figcaption>
+          </figure>
+
+          <figure>
+            <img loading="lazy" alt="산점도 행렬" src="{{MATRIX_URI}}" />
+            <figcaption>그림 4. 선택 변수 산점도 행렬(종가/등락률/대비/거래량/거래대금)</figcaption>
+          </figure>
+        </section>
+
+        <section id="c5">
+          <div class="section-title"><span class="pill">Chapter 5</span><h2>한계점 & 결론</h2></div>
+          <h3>한계점</h3>
+          <ul>
+            <li>데이터가 약 1년(243거래일)이라 장기 사이클까지는 보기 어렵습니다.</li>
+            <li>뉴스/실적/금리/환율 같은 외부 변수는 포함되지 않았습니다.</li>
+            <li>예측은 단순한 통계(추세+변동성) 기반이라 실제 주가를 보장하지 않습니다.</li>
+          </ul>
+
+          <h3>결론(쉽게)</h3>
+          <ul>
+            <li>상반기 횡보 후 하반기에 크게 상승했습니다.</li>
+            <li>가격 변수는 서로 너무 비슷해, 모델링 시 변수 선택/파생 변수가 중요합니다.</li>
+            <li>거래량과 거래대금은 관계가 강해 함께 보는 것이 유용합니다.</li>
+          </ul>
+        </section>
+
+        <section id="pred">
+          <div class="section-title"><span class="pill">예측</span><h2>2026-01-27 종가 예측(필수)</h2></div>
+
+          <div class="callout">
+            <b>예측 결과</b>
+            <ul>
+              <li><b>예측 종가(점추정)</b>: <b>116,700원</b></li>
+              <li><b>예측 범위(대략 5~95%)</b>: 94,000원 ~ 145,000원</li>
+            </ul>
+          </div>
+
+          <figure>
+            <img loading="lazy" alt="2026-01-27 종가 예측 그래프" src="{{FORECAST_URI}}" />
+            <figcaption>그림 5. 실제 종가 추이 + 2026-01-27 예측(점추정 및 범위)</figcaption>
+          </figure>
+        </section>
+
+        <section id="appendix">
+          <div class="section-title"><span class="pill">부록</span><h2>시각화 목록</h2></div>
+          <ul>
+            <li>종가 추이: 그림 1</li>
+            <li>상관관계 히트맵: 그림 2</li>
+            <li>log10(거래량) vs log10(거래대금): 그림 3</li>
+            <li>산점도 행렬: 그림 4</li>
+            <li>예측 그래프: 그림 5</li>
+          </ul>
+        </section>
+
+        <footer style="margin:28px 0 10px 0; color:var(--muted); font-size:12.5px">
+          <div style="border-top:1px solid var(--line); padding-top:12px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between">
+            <span>© 제출용 웹 문서</span>
+            <a href="#top">맨 위로</a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="tocDialog">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+        <h2 style="margin:0">목차</h2>
+        <button class="btn" id="closeToc">닫기</button>
+      </div>
+      <div style="margin-top:10px" class="toc">
+        <a href="#c1">Chapter 1 <small>목적 & 배경</small></a>
+        <a href="#c2">Chapter 2 <small>활용 데이터</small></a>
+        <a href="#c3">Chapter 3 <small>전처리 & EDA</small></a>
+        <a href="#c4">Chapter 4 <small>분석 결과</small></a>
+        <a href="#c5">Chapter 5 <small>한계 & 결론</small></a>
+        <a href="#pred">예측 <small>2026-01-27 종가</small></a>
+        <a href="#appendix">부록 <small>시각화 목록</small></a>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // Scroll spy
+    const links = Array.from(document.querySelectorAll('aside .toc a'));
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const id = '#' + e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+
+    sections.forEach(s => obs.observe(s));
+
+    // Mobile toc dialog
+    const dialog = document.getElementById('tocDialog');
+    const openBtn = document.getElementById('openToc');
+    const closeBtn = document.getElementById('closeToc');
+    if (openBtn) openBtn.addEventListener('click', () => dialog.showModal());
+    if (closeBtn) closeBtn.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      const rect = dialog.getBoundingClientRect();
+      const inDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height && rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dialog.close();
+    });
+    // Close dialog after clicking a link
+    dialog.querySelectorAll('a').forEach(a => a.addEventListener('click', () => dialog.close()));
+  </script>
+</body>
+</html>
