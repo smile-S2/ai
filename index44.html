@@ -15,7 +15,7 @@
         body {
             font-family: 'Helvetica Neue', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
             color: #000;
-            min-width: 1200px; /* 반응형 제거, 데스크탑 최소 너비 보장 */
+            min-width: 1200px;
             background-color: #fff;
         }
 
@@ -28,7 +28,6 @@
             list-style: none;
         }
 
-        /* 공통 유틸리티 클래스 */
         .container {
             width: 1200px;
             margin: 0 auto;
@@ -45,12 +44,12 @@
             position: relative;
         }
 
-        /* 헤더 최상단 (로고 및 유틸 메뉴) */
+        /* 헤더 최상단 */
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 100px;
             padding: 0 40px;
         }
 
@@ -65,7 +64,7 @@
             font-size: 32px;
             font-weight: 900;
             letter-spacing: -1px;
-            transform: scaleX(1.1); /* 약간 넓게 보이도록 처리 */
+            transform: scaleX(1.1);
         }
 
         .header-top .nav-right {
@@ -77,11 +76,14 @@
             justify-content: flex-end;
         }
 
-        /* 헤더 네비게이션 바 (검은색 배경) */
+        /* 헤더 네비게이션 */
         .header-nav {
+            text-align: center;
             background-color: #000;
             color: #fff;
-            height: 40px;
+            height: 80px;
+            display: flex;
+            align-items: center;
         }
 
         .header-nav ul {
@@ -94,26 +96,34 @@
             font-weight: bold;
         }
 
-        /* 히어로 섹션 (메인 배너) */
+                .header-nav ul li {
+            height: 100%; /* li의 높이를 메뉴 바 높이와 동일하게 설정 */
+            display: flex;
+            align-items: center;
+        }
+
+        .header-nav ul li a {
+            padding: 0 5px;
+            line-height: 1; /* 텍스트 자체의 라인 높이를 초기화하여 치우침 방지 */
+        }
+
+        /* --- 히어로 섹션 이미지 맞춤 설정 --- */
         .hero-section {
             width: 100%;
-            height: 600px;
+            height: 800px; /* 배너의 고정 높이 */
             position: relative;
+            padding-top: 0 !important;
         }
 
         .hero-section .hero-img {
             width: 100%;
             height: 100%;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #999;
-            background-img: url('images/main_visual.jpg')
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            /* 아래 속성들이 이미지를 꽉 채우는 핵심입니다 */
+            background-image: url('images/main_visual.jpg'); /* 예시 이미지 주소 */
+            background-size: cover;      /* 요소에 꽉 차게 조절 */
+            background-position: center; /* 이미지 중심을 중앙에 배치 */
+            background-repeat: no-repeat;/* 이미지 반복 방지 */
+            background-color: #f0f0f0;   /* 이미지 로드 전 배경색 */
         }
 
         .hero-controls {
@@ -127,7 +137,7 @@
         .hero-controls button {
             width: 40px;
             height: 40px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.7); /* 배경 투명도 조절 */
             color: #fff;
             border: none;
             cursor: pointer;
@@ -138,9 +148,9 @@
             border-bottom: none;
         }
 
-        /* 공통 섹션 스타일 */
+        /* 섹션 공통 */
         section {
-            padding: 80px 0;
+            padding: 0;
         }
 
         .section-title {
@@ -153,7 +163,7 @@
             text-align: center;
         }
 
-        /* ONLY BLACKUP 섹션 */
+        /* ONLY BLACKUP */
         .only-blackup-grid {
             display: flex;
             justify-content: space-between;
@@ -169,9 +179,8 @@
             margin-bottom: 15px;
             background-color: #ebebeb;
         }
-        /* 각 이미지 플레이스홀더 색상 약간 다르게 */
         .only-blackup-item:nth-child(2) .img-placeholder { background-color: #e0e0e0; }
-        .only-blackup-item:nth-child(3) .img-placeholder { background-color: #000; color: #fff; }
+        .only-blackup-item:nth-child(3) .img-placeholder { background-color: #f5f5f5; }
 
         .only-blackup-item h3 {
             font-size: 14px;
@@ -184,7 +193,7 @@
             color: #666;
         }
 
-        /* 2025 HS LOOKBOOK 섹션 */
+        /* LOOKBOOK */
         .lookbook-section .subtitle {
             font-size: 14px;
             font-weight: bold;
@@ -199,7 +208,7 @@
         }
 
         .product-item {
-            width: calc(25% - 15px); /* 4열 배치 */
+            width: calc(25% - 15px);
         }
 
         .product-img-wrap {
@@ -218,6 +227,8 @@
             left: 10px;
             font-size: 10px;
             font-weight: bold;
+            background-color: #fff;
+            padding: 2px 5px;
             z-index: 10;
         }
 
@@ -310,22 +321,16 @@
 </head>
 <body>
 
-    <!-- 헤더 영역 -->
     <header>
         <div class="header-top container">
-            <div class="nav-left">
-                <a href="#">SHOP</a>
-            </div>
-            <div class="logo">
-                <a href="#">BLACKUP</a>
-            </div>
+            <div class="nav-left"><a href="#">SHOP</a></div>
+            <div class="logo"><a href="#">BLACKUP</a></div>
             <div class="nav-right">
                 <a href="#">SEARCH</a>
                 <a href="#">ACCOUNT</a>
                 <a href="#">BAG : 0</a>
             </div>
         </div>
-        
         <div class="header-nav">
             <div class="container">
                 <ul>
@@ -339,7 +344,7 @@
         </div>
     </header>
 
-    <!-- 메인 배너 영역 -->
+    <!-- 히어로 섹션 -->
     <section class="hero-section">
         <div class="hero-img"></div>
         <div class="hero-controls">
@@ -348,41 +353,39 @@
         </div>
     </section>
 
-    <!-- ONLY BLACKUP 섹션 -->
+    <!-- ONLY BLACKUP -->
     <section class="container">
-        <h2 class="section-title">ONLY BLACKUP</h2>
+        <h2 class="section-title" style="margin-top: 50px;">ONLY BLACKUP</h2>
         <div class="only-blackup-grid">
             <div class="only-blackup-item">
-                <div class="img-placeholder"><img src="images/mid_01.jpg" alt="middleimage"></div>
+                <div class="img-placeholder"><img src="images/mid_01.jpg" alt="b-basic"></div>
                 <h3>B-BASIC & B-DENIM</h3>
                 <p>어디든 매치하기 좋은 데일리 아이템</p>
             </div>
             <div class="only-blackup-item">
-                <div class="img-placeholder"><img src="images/mid_02.jpg" alt="middleimage"></div>
+                <div class="img-placeholder"><img src="images/mid_02.jpg" alt="project"></div>
                 <h3>BLACKUP PROJECT</h3>
                 <p>블랙업만의 스페셜 프로젝트</p>
             </div>
             <div class="only-blackup-item">
-                <div class="img-placeholder"><img src="images/mid_03.jpg" alt="middleimage"></div>
+                <div class="img-placeholder"><img src="images/mid_03.jpg" alt="today"></div>
                 <h3>TODAY DELIVERY</h3>
                 <p>오늘 주문하고 내일 바로 입기</p>
             </div>
         </div>
     </section>
 
-    <!-- 2025 HS LOOKBOOK 섹션 -->
+    <!-- LOOKBOOK -->
     <section class="lookbook-section container">
         <div class="text-center">
-            <h2 class="section-title" style="margin-bottom: 0;">2025 HS LOOKBOOK</h2>
+            <h2 class="section-title" style="margin-top: 50px; margin-bottom: 0;">2025 HS LOOKBOOK</h2>
             <p class="subtitle">핫썸머 신상품 발매</p>
         </div>
-        
         <div class="product-grid">
-            <!-- 상품 아이템 1 -->
             <div class="product-item">
                 <div class="product-img-wrap">
                     <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"><img src="images/lookbook1.jpg" alt="lookbook"></div>
                     <button class="wishlist-btn">☐</button>
                 </div>
                 <div class="product-info">
@@ -390,11 +393,10 @@
                     <p class="price">73,000원</p>
                 </div>
             </div>
-            <!-- 상품 아이템 2 -->
             <div class="product-item">
                 <div class="product-img-wrap">
                     <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"><img src="images/lookbook2.jpg" alt="lookbook"></div>
                     <button class="wishlist-btn">☐</button>
                 </div>
                 <div class="product-info">
@@ -402,11 +404,10 @@
                     <p class="price">32,000원</p>
                 </div>
             </div>
-            <!-- 상품 아이템 3 -->
             <div class="product-item">
                 <div class="product-img-wrap">
                     <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"><img src="images/lookbook3.jpg" alt="lookbook"></div>
                     <button class="wishlist-btn">☐</button>
                 </div>
                 <div class="product-info">
@@ -414,11 +415,10 @@
                     <p class="price">56,000원</p>
                 </div>
             </div>
-            <!-- 상품 아이템 4 -->
             <div class="product-item">
                 <div class="product-img-wrap">
                     <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"><img src="images/lookbook4.jpg" alt="lookbook"></div>
                     <button class="wishlist-btn">☐</button>
                 </div>
                 <div class="product-info">
@@ -426,63 +426,12 @@
                     <p class="price">26,000원</p>
                 </div>
             </div>
-            
-            <!-- 상품 아이템 5 -->
-            <div class="product-item">
-                <div class="product-img-wrap">
-                    <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
-                    <button class="wishlist-btn">☐</button>
-                </div>
-                <div class="product-info">
-                    <p class="title">[BLACKUP PROJECT] 빈티지 체크 반팔 셔츠</p>
-                    <p class="price">42,000원</p>
-                </div>
-            </div>
-            <!-- 상품 아이템 6 -->
-            <div class="product-item">
-                <div class="product-img-wrap">
-                    <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
-                    <button class="wishlist-btn">☐</button>
-                </div>
-                <div class="product-info">
-                    <p class="title">[BLACKUP PROJECT] 헤이즐 핀턱 숏 팬츠</p>
-                    <p class="price">36,000원</p>
-                </div>
-            </div>
-            <!-- 상품 아이템 7 -->
-            <div class="product-item">
-                <div class="product-img-wrap">
-                    <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
-                    <button class="wishlist-btn">☐</button>
-                </div>
-                <div class="product-info">
-                    <p class="title">[BLACKUP PROJECT] 플로럴 레이스 나시 셋업</p>
-                    <p class="price">39,000원</p>
-                </div>
-            </div>
-            <!-- 상품 아이템 8 -->
-            <div class="product-item">
-                <div class="product-img-wrap">
-                    <span class="product-label">BLACKUP PROJECT</span>
-                    <div class="img-placeholder"></div>
-                    <button class="wishlist-btn">☐</button>
-                </div>
-                <div class="product-info">
-                    <p class="title">[BLACKUP PROJECT] 러브 레터링 오프숄더 티</p>
-                    <p class="price">28,000원</p>
-                </div>
-            </div>
         </div>
-
         <div class="btn-more-wrap">
-            <a href="#" class="btn-black">더 많은 신상품 보기</a>
+            <a href="#" class="btn-black" style="margin-bottom: 100px;">더 많은 신상품 보기</a>
         </div>
     </section>
 
-    <!-- 푸터 영역 -->
     <footer>
         <div class="container">
             <div class="footer-nav">
@@ -495,16 +444,12 @@
                     <li><a href="#">CUSTOMERS CARE</a></li>
                 </ul>
             </div>
-            
             <div class="footer-info">
                 <div class="footer-info-left">
                     <p>
                         <strong>COMPANY INFO</strong><br>
                         상호명 : (주)블랙업 | 대표자 : OOO<br>
-                        사업자등록번호 : 000-00-00000 | 통신판매업신고번호 : 2025-서울강남-0000<br>
-                        주소 : 서울특별시 강남구 강남대로 000, 0층 (역삼동)<br>
-                        개인정보보호책임자 : OOO (privacy@blackup.kr)<br>
-                        <br>
+                        주소 : 서울특별시 강남구 강남대로 000, 0층 (역삼동)<br><br>
                         COPYRIGHT © BLACKUP. ALL RIGHTS RESERVED.
                     </p>
                 </div>
@@ -512,11 +457,7 @@
                     <p>
                         <strong>CUSTOMER CENTER</strong><br>
                         <span style="font-size: 20px; font-weight: bold; color: #fff;">1588-0000</span><br>
-                        MON-FRI 10:00 - 17:00<br>
-                        LUNCH 12:30 - 13:30<br>
-                        SAT.SUN.HOLIDAY OFF<br>
-                        <br>
-                        <a href="#">Q&A BOARD ></a>
+                        MON-FRI 10:00 - 17:00
                     </p>
                 </div>
             </div>
