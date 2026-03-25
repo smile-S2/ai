@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CHABAK Login</title>
+    <style>
+        /* 기본 리셋 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5; /* 데스크탑 환경 시 배경색 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 모바일 앱 컨테이너 */
+        #app-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            max-height: 850px;
+            background-color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 공통 로고 스타일 */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo-text {
+            color: #5b72a9;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* 스플래시 화면 */
+        #splash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 로그인 화면 */
+        #login-screen {
+            display: none; /* JS로 전환 시 flex로 변경 */
+            opacity: 0;
+            flex-direction: column;
+            padding: 60px 30px;
+            height: 100%;
+            transition: opacity 0.5s ease;
+            background-color: #ffffff;
+        }
+
+        /* 폼 영역 */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #5b72a9;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            font-size: 16px;
+            outline: none;
+            color: #333;
+            background-color: transparent;
+        }
+
+        .form-group input:focus {
+            border-bottom: 2px solid #5b72a9;
+        }
+
+        /* 버튼 영역 */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #5b72a9;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #5b72a9;
+            border: 1px solid #5b72a9;
+        }
+
+        /* 하단 링크 */
+        .sub-links {
+            text-align: center;
+            margin: 10px 0 30px 0;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .sub-links a {
+            color: #888;
+            text-decoration: none;
+            padding: 0 8px;
+        }
+
+        .sub-links span {
+            color: #ddd;
+        }
+
+        /* 간편로그인 구분선 */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #7b85a3;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .divider::before { margin-right: 15px; }
+        .divider::after { margin-left: 15px; }
+
+        /* 소셜 로그인 버튼 */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .kakao { background-color: #fae100; color: #000; font-size: 11px; }
+        .naver { background-color: #03c75a; color: #fff; font-size: 18px; }
+        .google { background-color: #5f6368; color: #fff; font-size: 18px; }
+        .facebook { background-color: #1877f2; color: #fff; font-size: 20px; font-family: serif; }
+
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    <div id="splash-screen">
+        <div class="logo-container">
+            <svg width="150" height="70" viewBox="0 0 150 70" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15,55 Q15,35 35,35 L65,35 Q75,35 80,45 L85,55 Z" fill="#5b72a9"/>
+                <rect x="15" y="45" width="70" height="10" fill="#5b72a9"/>
+                <circle cx="28" cy="55" r="7" fill="white" stroke="#5b72a9" stroke-width="3"/>
+                <circle cx="68" cy="55" r="7" fill="white" stroke="#5b72a9" stroke-width="3"/>
+                <path d="M75,55 L95,20 L135,55 Z" fill="#5b72a9"/>
+                <path d="M100,20 L115,55 L135,55 Z" fill="#4a5f91"/>
+                <path d="M95,8 L98,13 L103,15 L98,17 L95,22 L92,17 L87,15 L92,13 Z" fill="#5b72a9"/>
+                <line x1="10" y1="58" x2="140" y2="58" stroke="#5b72a9" stroke-width="2"/>
+            </svg>
+            <div class="logo-text">CHABAK</div>
+        </div>
+    </div>
+
+    <div id="login-screen">
+        <div class="logo-container">
+            <svg width="120" height="55" viewBox="0 0 150 70" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15,55 Q15,35 35,35 L65,35 Q75,35 80,45 L85,55 Z" fill="#5b72a9"/>
+                <rect x="15" y="45" width="70" height="10" fill="#5b72a9"/>
+                <circle cx="28" cy="55" r="7" fill="white" stroke="#5b72a9" stroke-width="3"/>
+                <circle cx="68" cy="55" r="7" fill="white" stroke="#5b72a9" stroke-width="3"/>
+                <path d="M75,55 L95,20 L135,55 Z" fill="#5b72a9"/>
+                <path d="M100,20 L115,55 L135,55 Z" fill="#4a5f91"/>
+                <path d="M95,8 L98,13 L103,15 L98,17 L95,22 L92,17 L87,15 L92,13 Z" fill="#5b72a9"/>
+                <line x1="10" y1="58" x2="140" y2="58" stroke="#5b72a9" stroke-width="2"/>
+            </svg>
+            <div class="logo-text" style="font-size: 24px;">CHABAK</div>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label>아이디</label>
+                <input type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>비밀번호</label>
+                <input type="password" placeholder="">
+            </div>
+
+            <button type="button" class="btn btn-primary">로그인</button>
+            <button type="button" class="btn btn-secondary">회원가입</button>
+        </form>
+
+        <div class="sub-links">
+            <a href="#">아이디 찾기</a> <span>|</span>
+            <a href="#">비밀번호 찾기</a> <span>|</span>
+            <a href="#">둘러보기</a>
+        </div>
+
+        <div class="divider">간편로그인</div>
+
+        <div class="social-login">
+            <a href="#" class="social-btn kakao">TALK</a>
+            <a href="#" class="social-btn naver">N</a>
+            <a href="#" class="social-btn google">G</a>
+            <a href="#" class="social-btn facebook">f</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 3초 뒤에 스플래시 화면을 숨기고 로그인 화면을 보여주는 로직
+    window.addEventListener('DOMContentLoaded', () => {
+        const splashScreen = document.getElementById('splash-screen');
+        const loginScreen = document.getElementById('login-screen');
+
+        setTimeout(() => {
+            // 스플래시 화면 페이드 아웃
+            splashScreen.style.opacity = '0';
+            
+            // 페이드 아웃 애니메이션 시간(0.5초) 대기 후 화면 전환
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                loginScreen.style.display = 'flex';
+                
+                // 브라우저 렌더링 갱신 후 페이드 인
+                requestAnimationFrame(() => {
+                    loginScreen.style.opacity = '1';
+                });
+            }, 500);
+            
+        }, 3000); // 3000ms = 3초
+    });
+</script>
+
+</body>
+</html>
