@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국의 사계</title>
+    <style>
+        /* 기본 여백 제거 및 배경색(연두색) 설정 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #d1ec76; 
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* 전체 콘텐츠를 중앙에 배치하기 위한 컨테이너 */
+        .container {
+            margin-top: 100px; /* 상단 여백 */
+            text-align: center;
+            width: 100%;
+        }
+
+        /* 메인 제목 스타일 */
+        h1 {
+            font-size: 28px;
+            color: #111;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 구분선 스타일 */
+        .line {
+            width: 450px;
+            height: 4px;
+            background-color: #333;
+            margin: 0 auto;
+        }
+
+        /* 링크 목록 영역 스타일 */
+        .link-section {
+            padding: 30px 0;
+        }
+
+        /* 개별 링크 스타일 */
+        .link-section a {
+            display: block;
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: #111;
+            text-decoration: none; /* 기본 밑줄 제거 */
+        }
+
+        /* 마지막 링크의 하단 여백 제거 */
+        .link-section a:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 하단 카피라이트 스타일 */
+        .footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 타이틀 -->
+        <h1>한국의 사계</h1>
+
+        <!-- 상단 구분선 -->
+        <div class="line"></div>
+
+        <!-- 계절 링크 목록 -->
+        <div class="link-section">
+            <a href="ai_spring.html" class="active-link">봄의 계절</a>
+            <a href="ai_summer.html">여름의 계절</a>
+            <a href="ai_autumn.html">가을의 계절</a>
+            <a href="ai_winter.html">겨울의 계절</a>
+        </div>
+
+        <!-- 하단 구분선 -->
+        <div class="line"></div>
+
+        <!-- 카피라이트 -->
+        <div class="footer">
+            Copyrightⓒhyejin 2020 All Reserved.
+        </div>
+    </div>
+
+</body>
+</html>
