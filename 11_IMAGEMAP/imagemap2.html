@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imagemap</title>
+    <style>
+        h1, p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>상품을 선택하세요</h1>
+    <p>결합을 하시면 더욱 저렴하게 구입하실 수 있습니다.</p>
+    <p>
+        <img src="./IMAGES/bg-diy-tvplusone.png" alt="이미지맵 이미지" usemap="#circle">
+        <map name="circle">
+            <area shape="poly" coords="320,25,504,87,615,340,528,529,320,320" href="https://www.kt.com/" alt="KT바로가기" target="_blank">
+            <area shape="poly" coords="320,320,528,528,422,596,216,596,110,527" href="https://www.lguplus.com/" alt="LG바로가기" target="_blank">
+            <area shape="poly" coords="319,23,320,320,110,527,33,394,106,115,238,38" href="https://www.tworld.co.kr/web/home" alt="SKT바로가기" target="_blank">
+        </map>
+    </p>
+</body>
+</html>
