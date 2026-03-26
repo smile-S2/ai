@@ -48,6 +48,7 @@
             color: #fff;
             text-decoration: none;
             gap: 10px;
+            width: 200px; /* 로고 영역 너비 고정으로 2차 메뉴 정렬 기준 확보 */
         }
 
         .logo-icon {
@@ -61,10 +62,11 @@
             list-style: none;
             gap: 40px;
             height: 100%;
+            flex: 1;
         }
 
         .menu-item {
-            position: static; /* 2차 메뉴가 전체 너비를 갖도록 하기 위해 static 설정 */
+            position: static; /* 2차 메뉴가 전체 너비 배경을 갖되 위치는 부모 기준 */
             height: 80px;
             display: flex;
             align-items: center;
@@ -155,7 +157,8 @@
             height: 55px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+            padding-left: 220px; /* 로고(200px) + 컨테이너 패딩(20px) 위치에 맞춤 */
             gap: 45px;
         }
 
@@ -165,6 +168,7 @@
             font-size: 14px;
             font-weight: 500;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .lnb-link:hover {
@@ -206,7 +210,7 @@
             </a>
 
             <!-- GNB -->
-            <nav style="height: 100%;">
+            <nav style="height: 100%; flex: 1;">
                 <ul class="main-menu">
                     <!-- ABOUT -->
                     <li class="menu-item">
