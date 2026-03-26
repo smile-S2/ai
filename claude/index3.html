@@ -139,13 +139,14 @@
             opacity: 0.9;
         }
 
-        /* 2차 메뉴 (LNB) 영역 - 세로 드롭다운 형식으로 변경 */
+        /* 2차 메뉴 (LNB) 영역 - 세로 드롭다운 형식 */
         .lnb-container {
             display: none; /* 기본적으로 숨김 */
             position: absolute;
             top: 80px;
-            left: 0;
-            width: 200px; /* 드롭다운 너비 설정 */
+            left: 50%; /* 부모(1차메뉴) 기준 가운데 배치 */
+            transform: translateX(-50%); /* 정확한 중앙 정렬 */
+            width: 180px; /* 드롭다운 너비 */
             background-color: #211e1c;
             z-index: 999;
             box-shadow: 0 8px 16px rgba(0,0,0,0.5);
@@ -167,12 +168,12 @@
             padding: 12px 20px;
             display: block;
             white-space: nowrap;
+            text-align: center; /* 텍스트 정렬 가운데로 변경 */
         }
 
         .lnb-link:hover {
             color: #e67e22;
             background-color: #2c2926; /* 호버 시 배경색 약간 밝게 */
-            padding-left: 25px; /* 호버 시 약간 이동 효과 */
         }
 
         /* 메인 메뉴 호버 시 LNB 노출 */
