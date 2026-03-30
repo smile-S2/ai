@@ -1,0 +1,72 @@
+@charset "UTF-8"
+
+/* 기본 스타일 초기화 */
+        body{
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            padding: 50px;
+            background-color: #f8f9fa;
+        }
+
+        /* 공통 표 스타일 */
+        table {
+            width: 400px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid #e9ecef;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #4dabf7;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* 1번째 표 전용 스타일 (다단 구조) */
+        .table-1 .sub-header {
+            background-color: #e7f5ff;
+            color: #1971c2;
+            font-weight: 600;
+        }
+
+        .table-1 {
+    margin-bottom: 100px; /* 아래쪽으로 100px의 간격을 만듭니다 */
+}
+
+        /* 2번째 표 전용 스타일 (너비 지정 및 링크) */
+        .table-2 .col-category {
+            width: 130px;
+            background-color: #f1f3f5;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .table-2 .col-url {
+            width: 270px;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .table-2 a {
+            color: #228be6;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .table-2 a:hover {
+            color: #1864ab;
+            text-decoration: underline;
+        }

@@ -1,0 +1,86 @@
+@charset "UTF-8"
+
+/* 1. 기본 페이지 레이아웃 */
+body {
+    display: flex;
+    flex-direction: column; /* 표를 위아래로 배치 */
+    align-items: center;    /* 가운데 정렬 */
+    padding: 50px 0;
+    margin: 0;
+    background-color: #ffffff;
+    font-family: 'Malgun Gothic', dotum, sans-serif;
+}
+
+/* 2. 공통 테이블 스타일 (전체 너비 900px 및 표 형태) */
+table {
+    width: 900px;             /* 전체 가로 사이즈 900px 고정 */
+    border-collapse: collapse; /* 선이 하나로 합쳐지는 깔끔한 표 형식 */
+    margin-bottom: 40px;      /* 표와 표 사이의 간격 */
+    table-layout: fixed;      /* 셀 너비를 일정하게 유지 */
+}
+
+/* 3. 모든 셀(제목 및 내용) 공통 스타일 */
+th, td {
+    border: 1px solid #000000; /* 명확한 검정색 실선 */
+    padding: 15px;             /* 셀 내부 여백 */
+    text-align: center;        /* 텍스트 중앙 정렬 */
+    font-size: 16px;           /* 글자 크기 */
+    word-break: break-all;     /* 내용이 길어질 경우 자동 줄바꿈 */
+}
+
+/* 4. 항목 제목(먹는것, 타는것) 스타일 */
+th {
+    background-color: #f2f2f2; /* 연한 회색 배경 */
+    font-weight: bold;         /* 글자 굵게 */
+    color: #333;
+}
+
+/* 5. 데이터 셀 스타일 */
+td {
+    background-color: #ffffff; /* 흰색 배경 */
+    color: #000;
+}
+
+/* [참고] 두 번째 표(타는것)의 열 너비 비율 조정 */
+/* 첫 번째 열(타는것)은 좁게, 두 번째 열(비행기 등)은 넓게 설정 */
+.second-table th {
+    width: 30%; 
+}
+.second-table td {
+    width: 70%;
+}
+
+/* 1. 첫 번째 표와 두 번째 표 사이의 여백 설정 */
+/* 기존에 있던 table 스타일의 margin-bottom을 100px로 수정합니다. */
+table {
+    margin-bottom: 100px; /* 표 아래 여백을 100px로 설정 */
+}
+
+/* 2. 두 번째 표의 가로 사이즈를 300px로 변경 */
+/* 클래스 명을 이용해 두 번째 표만 선택합니다. */
+.second-table {
+    width: 300px;         /* 가로 사이즈 300px로 변경 */
+    margin-left: auto;    /* 중앙 정렬 유지 */
+    margin-right: auto;   /* 중앙 정렬 유지 */
+}
+
+/* 3. 두 번째 표의 내부 비율 조정 (선택 사항) */
+/* 전체가 300px로 줄어들었으므로 제목 칸 너비를 적절히 조절합니다. */
+.second-table th {
+    width: 40%; 
+}
+
+/* 테이블 내의 하이퍼링크 스타일 */
+td a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit;        /* 부모 요소(td)의 글자 색상을 그대로 따름 */
+    display: block;        /* 칸 전체를 클릭 영역으로 만듦 */
+    width: 100%;
+    height: 100%;
+}
+
+/* 마우스를 올렸을 때만 밑줄이 생기게 하고 싶다면 (선택 사항) */
+td a:hover {
+    text-decoration: underline;
+    color: #03cf5d; /* 네이버 시그니처 초록색으로 변경해보기 */
+}

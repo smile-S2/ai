@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    background-color: #f0f2f5;
+}
+
+table {
+    width: 500px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    text-align: center;
+}
+
+/* 1. 제목 행: 주황색 */
+thead tr {
+    background-color: orange;
+}
+
+th {
+    padding: 15px;
+    border: 1px solid #ddd;
+    color: white;
+}
+
+/* 2. 데이터 행: 노란색 */
+tbody tr {
+    background-color: yellow;
+}
+
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+/* 3. 3열(세로줄): 전부 하늘색 */
+/* nth-child(3)를 사용하면 제목 행과 데이터 행 모두의 3번째 칸을 선택합니다. */
+th:nth-child(3), 
+td:nth-child(3) {
+    background-color: skyblue;
+    color: #333; /* 글자색이 잘 보이도록 조정 */
+}
