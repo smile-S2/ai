@@ -30,15 +30,6 @@ function toggleLike(element) {
     }
 }
 
-// 3. 카테고리 선택 시 활성화 효과
-const catItems = document.querySelectorAll('.cat-item');
-catItems.forEach(item => {
-    item.addEventListener('click', () => {
-        catItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-    });
-});
-
 // 페이지 이동 시 하단 바 애니메이션 (간단 구현)
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
@@ -122,3 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// 카테고리 필터링 기능
+function filterCategory(categoryName) {
+    const products = document.querySelectorAll('.product-card');
+    
+    products.forEach(product => {
+        if (categoryName === '전체') {
+            product.style.display = 'block';
+        } else {
+            // 상품의 data-category 속성과 클릭한 카테고리명이 일치하는지 확인
+            if (product.getAttribute('data-category') === categoryName) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        }
+    });
+}

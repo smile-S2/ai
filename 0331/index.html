@@ -17,7 +17,7 @@
             <div class="header-icons">
                 <div class="icon-search">🔍</div>
                 <div class="icon-cart" onclick="location.href='cart.html'">
-                    🛒<span class="cart-count">2</span>
+                    🛒<span class="cart-count">3</span>
                 </div>
             </div>
         </header>
@@ -38,65 +38,78 @@
         </section>
 
         <nav class="categories">
-            <div class="cat-item active">전체</div>
-            <div class="cat-item">아우터</div>
-            <div class="cat-item">상의</div>
-            <div class="cat-item">하의</div>
-            <div class="cat-item">잠옷</div>
-            <div class="cat-item">잡화</div>
+            <div class="cat-item active" onclick="filterCategory('전체', this)">전체</div>
+            <div class="cat-item" onclick="filterCategory('아우터', this)">아우터</div>
+            <div class="cat-item" onclick="filterCategory('상의', this)">상의</div>
+            <div class="cat-item" onclick="filterCategory('하의', this)">하의</div>
+            <div class="cat-item" onclick="filterCategory('잡화', this)">잡화</div>
         </nav>
 
-        <main class="product-grid">
-            <div class="product-card">
-                <div class="img-box item-bg-1">
+        <main class="product-grid" id="productGrid">
+            
+            <div class="product-card" data-category="아우터" onclick="location.href='detail.html'">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=400&q=80" alt="아우터" style="width:100%; height:100%; object-fit:cover;">
                     <span class="tag">BEST</span>
-                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
-                    🧸
+                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
                 <div class="info-box">
-                    <p class="p-name">구름 솜사탕 가디건</p>
-                    <p class="p-price">32,000원</p>
+                    <p class="p-name">오버핏 울 코트</p>
+                    <p class="p-price">128,000원</p>
                     <div class="p-rating">⭐ 4.8 (120)</div>
                 </div>
             </div>
 
-            <div class="product-card">
-                <div class="img-box item-bg-2">
+            <div class="product-card" data-category="상의" onclick="location.href='detail.html'">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=400&q=80" alt="상의" style="width:100%; height:100%; object-fit:cover;">
                     <span class="tag">NEW</span>
-                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
-                    👗
+                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
                 <div class="info-box">
-                    <p class="p-name">보들보들 곰돌이 잠옷</p>
-                    <p class="p-price">28,900원</p>
-                    <div class="p-rating">⭐ 4.9 (245)</div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="img-box item-bg-1">
-                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
-                    🎀
-                </div>
-                <div class="info-box">
-                    <p class="p-name">파스텔 체크 롱 스커트</p>
+                    <p class="p-name">캐시미어 라운드 니트</p>
                     <p class="p-price">45,000원</p>
-                    <div class="p-rating">⭐ 4.7 (89)</div>
+                    <div class="p-rating">⭐ 4.9 (85)</div>
                 </div>
             </div>
 
-            <div class="product-card">
-                <div class="img-box item-bg-2">
-                    <span class="tag">SALE</span>
-                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
-                    👜
+            <div class="product-card" data-category="하의" onclick="location.href='detail.html'">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=400&q=80" alt="하의" style="width:100%; height:100%; object-fit:cover;">
+                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
                 <div class="info-box">
-                    <p class="p-name">모찌 보석 숄더백</p>
-                    <p class="p-price">19,800원</p>
-                    <div class="p-rating">⭐ 4.5 (56)</div>
+                    <p class="p-name">와이드 데님 팬츠</p>
+                    <p class="p-price">39,000원</p>
+                    <div class="p-rating">⭐ 4.7 (210)</div>
                 </div>
             </div>
+
+            <div class="product-card" data-category="잡화" onclick="location.href='detail.html'">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" alt="잡화" style="width:100%; height:100%; object-fit:cover;">
+                    <span class="tag">SALE</span>
+                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
+                </div>
+                <div class="info-box">
+                    <p class="p-name">가죽 미니 숄더백</p>
+                    <p class="p-price">52,000원</p>
+                    <div class="p-rating">⭐ 4.6 (42)</div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="상의" onclick="location.href='detail.html'">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=400&q=80" alt="상의" style="width:100%; height:100%; object-fit:cover;">
+                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
+                </div>
+                <div class="info-box">
+                    <p class="p-name">포근포근 루즈핏 티셔츠</p>
+                    <p class="p-price">18,000원</p>
+                    <div class="p-rating">⭐ 4.8 (156)</div>
+                </div>
+            </div>
+
         </main>
 
         <nav class="bottom-nav">
@@ -115,6 +128,37 @@
         </nav>
     </div>
 
-    <script src="./script/cript.js"></script>
+    <script src="./script/script.js"></script>
+
+    <script>
+        function filterCategory(category, element) {
+    // 1. 모든 카테고리 아이템에서 'active' 클래스 제거
+    const tabs = document.querySelectorAll('.cat-item');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // 2. 클릭된 탭(element)에 'active' 클래스 추가
+    if (element) {
+        element.classList.add('active');
+    }
+
+    // 3. 상품 필터링 로직
+    const products = document.querySelectorAll('.product-card');
+    products.forEach(product => {
+        const productCat = product.getAttribute('data-category');
+        if (category === '전체') {
+            product.style.display = 'block';
+        } else {
+            // 데이터 속성과 일치하는지 확인
+            if (productCat === category) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        }
+    });
+}
+    </script>
 </body>
 </html>

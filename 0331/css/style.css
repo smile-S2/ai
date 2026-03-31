@@ -156,12 +156,6 @@ body {
     transition: 0.2s;
 }
 
-.cat-item.active {
-    background: var(--main-pink);
-    color: white;
-    font-weight: bold;
-}
-
 /* --- 5. 상품 리스트 그리드 --- */
 .product-grid {
     display: grid;
@@ -442,4 +436,45 @@ body {
         transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.5) rotate(var(--r));
         opacity: 0;
     }
+}
+
+/* style.css 하단에 추가 */
+.detail-img-box {
+    width: 100%;
+    border-radius: 0 0 40px 40px; /* 하단만 둥글게 */
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-info h2 {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 900;
+}
+
+/* 카테고리 탭 기본 스타일 */
+/* style.css */
+
+/* 기본 탭 스타일 */
+.cat-item {
+    padding: 10px 20px;
+    background-color: #F8F8F8; /* 기본은 연회색 */
+    color: #888;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+/* 활성화된 탭 스타일 (우선순위를 위해 !important 사용) */
+.cat-item.active {
+    background-color: #FFB7C5 !important; /* 포근 핑크 */
+    color: white !important;            /* 글자 흰색 */
+    font-weight: bold !important;
+}
+
+/* style.css 맨 하단에 추가 */
+.categories .cat-item.active {
+    background-color: var(--main-pink) !important;
+    color: white !important;
+    font-weight: bold !important;
 }
