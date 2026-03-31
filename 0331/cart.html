@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POGEUN | 장바구니</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-container">
+        <header class="header">
+            <div class="back-btn" onclick="history.back()">←</div>
+            <h1 class="logo-center">장바구니</h1>
+            <div class="header-icons"></div>
+        </header>
+
+        <main class="cart-content">
+            <div class="cart-item">
+                <div class="cart-img item-bg-1">🧸</div>
+                <div class="cart-info">
+                    <p class="cart-name">구름 솜사탕 가디건</p>
+                    <p class="cart-option">옵션: 스카이블루 / FREE</p>
+                    <div class="cart-price-row">
+                        <span class="p-price">32,000원</span>
+                        <div class="stepper">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="delete-btn">×</div>
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row"><span>총 상품금액</span><span>32,000원</span></div>
+                <div class="summary-row"><span>배송비</span><span>0원</span></div>
+                <div class="summary-row total"><span>결제 예정 금액</span><span class="pink-text">32,000원</span></div>
+            </div>
+        </main>
+
+        <div class="fixed-bottom-btn">
+            <button class="btn-order">32,000원 주문하기</button>
+        </div>
+    </div>
+        <script src="./script/script.js"></script>
+</body>
+</html>

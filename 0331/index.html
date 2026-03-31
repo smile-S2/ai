@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>POGEUN | 포근포근 쇼핑몰</title>
+    
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="mobile-container">
+        <header class="header">
+            <h1 class="logo" onclick="location.href='index.html'">POGEUN</h1>
+            <div class="header-icons">
+                <div class="icon-search">🔍</div>
+                <div class="icon-cart" onclick="location.href='cart.html'">
+                    🛒<span class="cart-count">2</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="banner-container">
+            <div class="banner-wrapper" id="bannerWrapper">
+                <div class="banner-item color-1">
+                    <span class="tag">HOT</span>
+                    <h2>포근한 니트 가디건<br>최대 30% 할인 중 ✨</h2>
+                    <button class="btn-more">보러가기</button>
+                </div>
+                <div class="banner-item color-2">
+                    <span class="tag">EVENT</span>
+                    <h2>신규 가입하면<br>무료 배송 쿠폰 🎁</h2>
+                    <button class="btn-more">쿠폰받기</button>
+                </div>
+            </div>
+        </section>
+
+        <nav class="categories">
+            <div class="cat-item active">전체</div>
+            <div class="cat-item">아우터</div>
+            <div class="cat-item">상의</div>
+            <div class="cat-item">하의</div>
+            <div class="cat-item">잠옷</div>
+            <div class="cat-item">잡화</div>
+        </nav>
+
+        <main class="product-grid">
+            <div class="product-card">
+                <div class="img-box item-bg-1">
+                    <span class="tag">BEST</span>
+                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
+                    🧸
+                </div>
+                <div class="info-box">
+                    <p class="p-name">구름 솜사탕 가디건</p>
+                    <p class="p-price">32,000원</p>
+                    <div class="p-rating">⭐ 4.8 (120)</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-box item-bg-2">
+                    <span class="tag">NEW</span>
+                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
+                    👗
+                </div>
+                <div class="info-box">
+                    <p class="p-name">보들보들 곰돌이 잠옷</p>
+                    <p class="p-price">28,900원</p>
+                    <div class="p-rating">⭐ 4.9 (245)</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-box item-bg-1">
+                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
+                    🎀
+                </div>
+                <div class="info-box">
+                    <p class="p-name">파스텔 체크 롱 스커트</p>
+                    <p class="p-price">45,000원</p>
+                    <div class="p-rating">⭐ 4.7 (89)</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-box item-bg-2">
+                    <span class="tag">SALE</span>
+                    <button class="btn-wish" onclick="toggleLike(this)">♥</button>
+                    👜
+                </div>
+                <div class="info-box">
+                    <p class="p-name">모찌 보석 숄더백</p>
+                    <p class="p-price">19,800원</p>
+                    <div class="p-rating">⭐ 4.5 (56)</div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="location.href='index.html'">
+                🏠<span>홈</span>
+            </div>
+            <div class="nav-item" onclick="location.href='category.html'">
+                🛍️<span>카테고리</span>
+            </div>
+            <div class="nav-item">
+                ❤️<span>찜</span>
+            </div>
+            <div class="nav-item" onclick="location.href='mypage.html'">
+                👤<span>마이</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="./script/cript.js"></script>
+</body>
+</html>
