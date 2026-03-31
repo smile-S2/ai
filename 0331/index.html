@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>POGEUN | 포근포근 쇼핑몰</title>
-    
     <link rel="stylesheet" href="./css/style.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -46,10 +44,9 @@
         </nav>
 
         <main class="product-grid" id="productGrid">
-            
-            <div class="product-card" data-category="아우터" onclick="location.href='detail.html'">
+            <div class="product-card" data-category="아우터" onclick="location.href='detail.html?id=item1'">
                 <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=400&q=80" alt="아우터" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=400&q=80" alt="상품1" style="width:100%; height:100%; object-fit:cover;">
                     <span class="tag">BEST</span>
                     <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
@@ -60,9 +57,9 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="상의" onclick="location.href='detail.html'">
+            <div class="product-card" data-category="상의" onclick="location.href='detail.html?id=item2'">
                 <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=400&q=80" alt="상의" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=400&q=80" alt="상품2" style="width:100%; height:100%; object-fit:cover;">
                     <span class="tag">NEW</span>
                     <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
@@ -73,9 +70,9 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="하의" onclick="location.href='detail.html'">
+            <div class="product-card" data-category="하의" onclick="location.href='detail.html?id=item3'">
                 <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=400&q=80" alt="하의" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=400&q=80" alt="상품3" style="width:100%; height:100%; object-fit:cover;">
                     <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
                 <div class="info-box">
@@ -85,9 +82,9 @@
                 </div>
             </div>
 
-            <div class="product-card" data-category="잡화" onclick="location.href='detail.html'">
+            <div class="product-card" data-category="잡화" onclick="location.href='detail.html?id=item4'">
                 <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" alt="잡화" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" alt="상품4" style="width:100%; height:100%; object-fit:cover;">
                     <span class="tag">SALE</span>
                     <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
                 </div>
@@ -97,68 +94,31 @@
                     <div class="p-rating">⭐ 4.6 (42)</div>
                 </div>
             </div>
-
-            <div class="product-card" data-category="상의" onclick="location.href='detail.html'">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=400&q=80" alt="상의" style="width:100%; height:100%; object-fit:cover;">
-                    <button class="btn-wish" onclick="event.stopPropagation(); toggleLike(this)">♥</button>
-                </div>
-                <div class="info-box">
-                    <p class="p-name">포근포근 루즈핏 티셔츠</p>
-                    <p class="p-price">18,000원</p>
-                    <div class="p-rating">⭐ 4.8 (156)</div>
-                </div>
-            </div>
-
         </main>
 
         <nav class="bottom-nav">
-            <div class="nav-item active" onclick="location.href='index.html'">
-                🏠<span>홈</span>
-            </div>
-            <div class="nav-item" onclick="location.href='category.html'">
-                🛍️<span>카테고리</span>
-            </div>
-            <div class="nav-item">
-                ❤️<span>찜</span>
-            </div>
-            <div class="nav-item" onclick="location.href='mypage.html'">
-                👤<span>마이</span>
-            </div>
+            <div class="nav-item active" onclick="location.href='index.html'">🏠<span>홈</span></div>
+            <div class="nav-item" onclick="location.href='category.html'">🛍️<span>카테고리</span></div>
+            <div class="nav-item" onclick="location.href='wishlist.html'">❤️<span>찜</span></div>
+            <div class="nav-item" onclick="location.href='mypage.html'">👤<span>마이</span></div>
         </nav>
     </div>
 
     <script src="./script/script.js"></script>
-
     <script>
         function filterCategory(category, element) {
-    // 1. 모든 카테고리 아이템에서 'active' 클래스 제거
-    const tabs = document.querySelectorAll('.cat-item');
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
+            // 탭 컬러 변경
+            const tabs = document.querySelectorAll('.cat-item');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            if (element) element.classList.add('active');
 
-    // 2. 클릭된 탭(element)에 'active' 클래스 추가
-    if (element) {
-        element.classList.add('active');
-    }
-
-    // 3. 상품 필터링 로직
-    const products = document.querySelectorAll('.product-card');
-    products.forEach(product => {
-        const productCat = product.getAttribute('data-category');
-        if (category === '전체') {
-            product.style.display = 'block';
-        } else {
-            // 데이터 속성과 일치하는지 확인
-            if (productCat === category) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
+            // 상품 필터링
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                const productCat = product.getAttribute('data-category');
+                product.style.display = (category === '전체' || productCat === category) ? 'block' : 'none';
+            });
         }
-    });
-}
     </script>
 </body>
 </html>

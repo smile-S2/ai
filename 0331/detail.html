@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>POGEUN | 상품 상세</title>
-    
     <link rel="stylesheet" href="./css/style.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -15,48 +13,51 @@
             <div class="back-btn" onclick="history.back()">←</div>
             <h1 class="logo-center">상품 정보</h1>
             <div class="header-icons">
-                <div class="icon-cart" onclick="location.href='cart.html'">
-                    🛒<span class="cart-count">3</span>
-                </div>
+                <div class="icon-cart" onclick="location.href='cart.html'">🛒</div>
             </div>
         </header>
 
         <main>
             <div class="detail-img-box">
-                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="상품 이미지" style="width:100%; height:400px; object-fit:cover; border-radius: 0 0 40px 40px;">
+                <img id="detailImg" src="" alt="" style="width:100%; height:400px; object-fit:cover;">
             </div>
 
             <section class="detail-info" style="padding: 25px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-                    <h2 style="font-size: 22px; font-weight: 900; color: var(--text-dark);">구름 솜사탕 가디건</h2>
-                    <span style="background: var(--soft-bg); color: var(--main-pink); padding: 4px 10px; border-radius: 10px; font-size: 12px; font-weight: 800;">BEST</span>
-                </div>
-                
-                <p style="color: var(--main-pink); font-size: 26px; font-weight: 900; margin-bottom: 20px;">32,000원</p>
-                
-                <div style="background: var(--light-gray); padding: 20px; border-radius: 25px; font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 30px;">
-                    포근포근한 촉감으로 하루 종일 기분 좋은 가디건입니다. <br>
-                    보들보들한 소재와 여유로운 루즈핏으로 <br>
-                    어떤 하의와 매치해도 사랑스러운 무드를 완성해 드려요. ✨
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <p style="font-size: 14px; font-weight: bold; margin-bottom: 10px;">색상 선택</p>
-                    <div style="display: flex; gap: 10px;">
-                        <div style="width: 30px; height: 30px; background: #FFE4E1; border-radius: 50%; border: 2px solid var(--main-pink); cursor: pointer;"></div>
-                        <div style="width: 30px; height: 30px; background: #E0F2F1; border-radius: 50%; cursor: pointer;"></div>
-                        <div style="width: 30px; height: 30px; background: #FFFFFF; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;"></div>
-                    </div>
+                <h2 id="detailName" style="font-size: 22px; font-weight: 900;">상품명 로딩 중...</h2>
+                <p id="detailPrice" style="color: var(--main-pink); font-size: 26px; font-weight: 900; margin: 10px 0 20px;">0원</p>
+                <div id="detailDesc" style="background: var(--light-gray); padding: 20px; border-radius: 25px; font-size: 15px; color: #555;">
+                    상품 설명을 불러오고 있습니다.
                 </div>
             </section>
         </main>
 
         <div class="fixed-bottom-btn" style="display: flex; gap: 12px; background: white; padding: 15px 20px 35px; border-top: 1px solid #f2f2f2;">
-            <button class="btn-wish" style="position: static; width: 60px; height: 60px; flex-shrink: 0; background: var(--light-gray); color: #ccc; border-radius: 20px; border: none; font-size: 24px;" onclick="toggleLike(this)">♥</button>
+            <button class="btn-wish" style="position: static; width: 60px; height: 60px; background: var(--light-gray); color: #ccc; border-radius: 20px; border: none; font-size: 24px;" onclick="toggleLike(this)">♥</button>
             <button class="btn-order" style="flex-grow: 1; height: 60px;">장바구니 담기</button>
         </div>
     </div>
 
     <script src="./script/script.js"></script>
+    <script>
+        // 상품 데이터 리스트
+        const products = {
+            'item1': { name: "오버핏 울 코트", price: "128,000원", desc: "포근한 울 소재로 제작되어 겨울철에도 따뜻하게 즐길 수 있는 코트입니다. ✨", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
+            'item2': { name: "캐시미어 라운드 니트", price: "45,000원", desc: "피부에 닿는 촉감이 너무나 보들보들한 캐시미어 니트입니다. 🧸", img: "https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=600&q=80" },
+            'item3': { name: "와이드 데님 팬츠", price: "39,000원", desc: "여유 있는 핏으로 하루 종일 편안한 착용감을 선사하는 데님입니다. 👖", img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" },
+            'item4': { name: "가죽 미니 숄더백", price: "52,000원", desc: "가볍게 들기 좋은 미니 사이즈의 세련된 숄더백입니다. 👜", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" }
+        };
+
+        // URL 파라미터에서 ID 가져오기
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if (id && products[id]) {
+            const item = products[id];
+            document.getElementById('detailImg').src = item.img;
+            document.getElementById('detailName').innerText = item.name;
+            document.getElementById('detailPrice').innerText = item.price;
+            document.getElementById('detailDesc').innerText = item.desc;
+        }
+    </script>
 </body>
 </html>
