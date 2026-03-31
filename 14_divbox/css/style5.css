@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "맑은 고딕";
+}
+
+.contentbox{
+    width: 350px;
+    margin: 0 auto;
+}
+
+.imgbox{
+    width: 350px;
+    height: 260px;
+}
+
+.imgbox img{
+    width: 350px;
+    height: 260px;
+}
+
+.contentbox .content{
+    width: 350px;
+    padding: 42px 0;
+    margin-top: -18px;
+}
+
+.content p{
+    font-size: 14px;
+    color: #877ABB;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.content h3{
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    color: #111;
+    margin-bottom: 16px;
+}
+
+.content h2{
+    font-size: 22px;
+    font-weight: 900;
+    color: #111;
+}
+
+h2 span{
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    margin-left: -2px;
+}

@@ -24,8 +24,8 @@ body{
     margin-right: 20px;
 }
 
-.last{
-    margin-right: 0;
+div .last{
+    margin-right: 0px;
 }
 
 ul{
