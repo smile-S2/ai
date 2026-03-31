@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Pretendard';
+}
+
+.box1{
+    border: 5px solid black;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.box1 div{
+    background-color: aliceblue;
+    width: 235px;
+    height: 300px;
+    margin-right: 20px;
+    float: left;
+}
+
+.box1 .last{
+    margin-right: 0px;
+}
+
+ul{
+    border: 5px solid black;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+ul li{
+    list-style: none;
+    background-color: pink;
+    width: 235px;
+    height: 300px;
+    margin-right: 20px;
+    float: left;
+}
+
+ul .last{
+    margin-right: 0px;
+}

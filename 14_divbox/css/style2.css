@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Pretendard";
+}
+
+.box1{
+    border: 5px solid red;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.listbox1 li{
+    list-style: none;
+    background-color: pink;
+    width: 480px;
+    height: 300px;
+    margin-right: 40px;
+    float: left;
+}
+
+.last{
+    margin-right: 0;
+}
+
+.box2{
+    border: 5px solid blue;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.listbox2{
+    display: flex;
+}
+
+.listbox2 li{
+    list-style: none;
+    background-color: yellowgreen;
+    width: 320px;
+    height: 300px;
+    margin-right: 20px;
+    float: left;
+}

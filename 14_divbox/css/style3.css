@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "맑은 고딕";
+}
+
+.box1{
+    border: 5px solid black;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.box1 div{
+    width: 320px;
+    height: 300px;
+    background: lightblue;
+    float: left;
+    margin-right: 20px;
+}
+
+.last{
+    margin-right: 0;
+}
+
+ul{
+    border: 5px solid purple;
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+ul li{
+    list-style: none;
+    width: 320px;
+    height: 300px;
+    background-color: antiquewhite;
+    float: left;
+    margin-right: 20px;
+}
+
+.lilast {
+    margin-right: 0;
+}
