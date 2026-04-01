@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Noto Sans KR";
+}
+
+section{
+    width: 100%;
+    /*높이는 지정하지 않는다*/
+    padding: 180px 0 100px;
+}
+
+section .title{
+    text-align: center;
+}
+
+section .title h2{
+    font-size: 40px;
+    font-weight: 900;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+section .title p{
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 32px;
+    color: #222;
+}
+
+section ul{
+    display: flex;
+    gap: 16px;
+    justify-content: center; /*flex 상태에서 사용명령*/
+    margin-top: 72px;
+}
+
+section ul li{
+    list-style: none;
+}
+
+section .box_total_wrap{
+    width: 1140px;
+    /*자식의 높이를 모르므로 높이는 지정하지 않는다*/
+    margin: 50px auto 0; /*위 좌우 아래 순*/
+    display: flex;
+    gap: 20px;
+}
+
+section .box_total_wrap .left{
+    border: 1px solid #313131;
+    width: 312px;
+    height: 655px;
+}
+
+section .box_total_wrap .center{
+    width: 474px;
+    height: 655px;
+}
+
+section .box_total_wrap .center .video{
+    width: 100%; /*부모사이즈 기준*/
+    height: 428px;
+    border: 1px solid #313131;
+    padding: 40px;
+    box-sizing: border-box; /*패딩으로 늘어나는 거 방지*/
+    margin-bottom: 19px;
+}
+
+/*------h3 한번에 선택------*/
+section .box_total_wrap div h3{
+    font-size: 27px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+section .box_total_wrap div p{
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+section .box_total_wrap .center .cs{
+    width: 100%;
+    height: 210px;
+    border: 1px solid #313131;
+    padding: 24px 40px;
+    box-sizing: border-box;
+}
+
+section .box_total_wrap .right{
+    width: 313px;
+    height: 655px;
+}
+
+section .box_total_wrap .right .food{
+    width: 100%;
+    height: 213px;
+    padding: 32px;
+    box-sizing: border-box;
+    border: 1px solid #313131;
+}
+
+section .box_total_wrap .right .notice{
+    border: 1px solid #313131;
+    width: 100%;
+    height: 193px;
+    margin-top: 19px;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+section .box_total_wrap .right .mall{
+    border: 1px solid #313131;
+    width: 100%;
+    height: 210px;
+    margin-top: 19px;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+section .box_total_wrap div button{
+    background-color: #ff6400;
+    border: 1px solid #ff6400;
+    border-radius: 999px;
+    color: #fff;
+    margin-top: 28px;
+    width: 90px;
+    height: 26px;
+    /*버튼 호버 시 커서 변경*/
+    cursor: pointer;
+}
