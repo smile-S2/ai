@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <h1>[폼 구성 요소 알아보기]</h1>
+    <!--데이터 전송을 위한 폼 태그-->
+    <form action="" name="login" method="POST">
+        <fieldset> <!--네모난 박스 (테두리)-->
+            <legend>로그인 화면</legend> <!--폼 이름-->
+            <ol> <!--순서있는목록-->
+                <li>
+                    <!--label for: 웹접근성코딩-->
+                    <label for="inputbox">ID</label> <!--인라인요소임/라벨-->
+                    <input type="text" name="id" id="inputbox" class="idbox" placeholder="ID or Phonenumber"> <!--객관식(한줄)/placeholder:예시/text:보이는 텍스트-->
+                </li>
+                <li>
+                    <label for="pwbox">PASSWORD</label>
+                    <input type="password" name="pw" placeholder="PASSWORD" id="pwbox"><!--password:보이지 않도록 조정-->
+                </li>
+                <li></li>
+            </ol>
+        </fieldset>
+
+        <!--서버로 데이터 전송하는 버튼 (폼태그안에 있어야함)-->
+        <input type="submit" value="LOGIN">
+        <!--입력한 데이터 초기화 (폼태그안에 있어야함)-->
+        <input type="reset" value="RESET">
+
+    </form>
+
+    <form action="" name="my" method="POST">
+        <fieldset>
+            <legend>개인신상정보</legend>
+            <ul>
+                <li>
+                    <!--radio 버튼은 여러 요소 중 하나만 선택할 때 사용/기본값 설정은 checked 로-->
+                    <input type="radio" name="gender" id="man"><label for="man">남성</label>
+                    <input type="radio" name="gender" checked id="woman"><label for="woman">여성</label>
+                    <input type="radio" name="gender" id="non"><label for="non">그 외</label>
+                    <!--변수명(name)이 일치해야 한개만 선택가능-->
+                    <!--id 와 for 가 일치하면 됨-->
+                </li>
+                <li>
+                    <label for="trip">여행</label>
+                    <input type="checkbox" name="chk" id="trip" checked value="trip">
+                    <label for="movie">영화</label>
+                    <input type="checkbox" name="chk2" id="movie" value="movie">
+                    <label for="reading">독서</label>
+                    <input type="checkbox" name="chk3" id="reading" value="reading">
+                </li>
+                <li>
+                    <label for="color">목록선택</label>
+                    <select name="color" id="color">
+                        <option value="">:::::COLOR SELECT:::::</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="message">MESSAGE</label>
+                    <textarea name="msg" id="message" cols="50" rows="5" placeholder="문의사항 작성"></textarea>
+                </li>
+                <li>
+                    <label for="upload">파일 첨부</label>
+                    <input type="file" name="file" id="upload">
+                </li>
+                <li>
+                    <label for="colorlist">색상선택</label>
+                    <input type="color" name="cl" id="colorlist">
+                </li>
+                <li>
+                    <label for="date">날짜 선택</label>
+                    <input type="date" name="date" id="date">
+                </li>
+                <li>
+                    <label for="time">예약 시각</label>
+                    <input type="time" name="time" id="time">
+                </li>
+                <li>
+                    <label for="dt">날짜 및 시각</label>
+                    <input type="datetime-local" name="datetime" id="dt">
+                </li>
+                <li>
+                    <label for="ml">리스트 목록 다중 선택</label>
+                    <select name="multiselect" id="ml" multiple>
+                        <option value="">사이즈를 선택하세요</option>
+                        <option value="44">44</option>
+                        <option value="55">55</option>
+                        <option value="66">66</option>
+                        <option value="77">77</option>
+                    </select>
+                </li>
+            </ul>
+        </fieldset>
+
+        <input type="submit" name="submit" id="submit" value="SUBMIT">
+        <input type="reset" name="reset" id="reset" value="RESET">
+    </form>
+</body>
+</html>

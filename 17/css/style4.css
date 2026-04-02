@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+ul li{
+    list-style: none;
+    margin-left: -16px;
+}
+
+form fieldset{
+    width: 530px;
+    height: 100px;
+}
+
+label{
+    display: block;
+}
