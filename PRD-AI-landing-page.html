@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>PRD - AI 실무 협업 랜딩 페이지</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Pretendard', sans-serif; background: #fff; color: #191F28; line-height: 1.7; font-size: 15px; }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 72px 48px; }
+
+  /* Header */
+  .doc-header { border-bottom: 2px solid #3182F6; padding-bottom: 32px; margin-bottom: 48px; }
+  .doc-title { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; color: #0A1628; margin-bottom: 12px; }
+  .doc-title span { color: #3182F6; }
+  .doc-meta { display: flex; gap: 32px; margin-top: 20px; }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #B0B8C1; }
+  .meta-value { font-size: 14px; font-weight: 600; color: #333D4B; }
+  .badge { display: inline-block; background: #EBF3FF; color: #3182F6; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+  /* TOC */
+  .toc { background: #F9FAFB; border-radius: 16px; padding: 28px 32px; margin-bottom: 56px; border: 1px solid #F2F4F6; }
+  .toc-title { font-size: 13px; font-weight: 700; color: #6B7684; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .toc ol { padding-left: 18px; }
+  .toc li { margin: 8px 0; }
+  .toc a { font-size: 14px; color: #3182F6; text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* Sections */
+  .section { margin-bottom: 60px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #F2F4F6; }
+  .section-num { width: 32px; height: 32px; background: #3182F6; color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; color: #0A1628; }
+  h3 { font-size: 16px; font-weight: 700; color: #191F28; margin: 24px 0 10px; letter-spacing: -0.3px; }
+  p { color: #333D4B; margin-bottom: 12px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: #F2F4F6; padding: 12px 16px; text-align: left; font-weight: 700; color: #6B7684; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 12px 16px; border-bottom: 1px solid #F2F4F6; color: #333D4B; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #F9FAFB; }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .card { background: #F9FAFB; border: 1px solid #F2F4F6; border-radius: 12px; padding: 20px 24px; }
+  .card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #B0B8C1; margin-bottom: 8px; }
+  .card h4 { font-size: 15px; font-weight: 700; color: #191F28; margin-bottom: 6px; letter-spacing: -0.3px; }
+  .card p { font-size: 13px; color: #6B7684; margin: 0; line-height: 1.6; }
+
+  /* Tags */
+  .tag { display: inline-block; background: #EBF3FF; color: #3182F6; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 6px; margin: 3px 3px 3px 0; }
+  .tag.green { background: #F0FDF4; color: #059669; }
+  .tag.orange { background: #FFF7ED; color: #EA580C; }
+  .tag.purple { background: #FAF5FF; color: #7C3AED; }
+
+  /* List */
+  ul.styled { padding-left: 0; list-style: none; }
+  ul.styled li { padding: 10px 0; padding-left: 20px; position: relative; border-bottom: 1px solid #F2F4F6; color: #333D4B; font-size: 14px; }
+  ul.styled li::before { content: '→'; position: absolute; left: 0; color: #3182F6; font-weight: 700; }
+  ul.styled li:last-child { border-bottom: none; }
+
+  /* Priority */
+  .priority { display: inline-flex; align-items: center; gap: 4px; }
+  .priority-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .p-high .priority-dot { background: #EF4444; }
+  .p-mid .priority-dot { background: #F59E0B; }
+  .p-low .priority-dot { background: #10B981; }
+  .p-high { color: #DC2626; font-weight: 600; font-size: 13px; }
+  .p-mid { color: #D97706; font-weight: 600; font-size: 13px; }
+  .p-low { color: #059669; font-weight: 600; font-size: 13px; }
+
+  /* Notice */
+  .notice { background: #EBF3FF; border-left: 4px solid #3182F6; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; }
+  .notice p { color: #1B64DA; margin: 0; font-size: 14px; font-weight: 500; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: #F2F4F6; }
+  .timeline-item { position: relative; margin-bottom: 24px; }
+  .timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; background: #3182F6; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 2px #3182F6; }
+  .timeline-phase { font-size: 12px; font-weight: 700; color: #3182F6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .timeline-title { font-size: 15px; font-weight: 700; color: #191F28; margin-bottom: 4px; }
+  .timeline-desc { font-size: 13px; color: #6B7684; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-title">AI 실무 협업<span> 랜딩 페이지</span><br>PRD 문서</div>
+    <div class="doc-meta">
+      <div class="meta-item">
+        <span class="meta-label">문서 버전</span>
+        <span class="meta-value">v1.0</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">작성일</span>
+        <span class="meta-value">2026년 4월</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">상태</span>
+        <span class="badge">Draft</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">플랫폼</span>
+        <span class="meta-value">데스크탑 웹 (HTML/CSS/JS)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">목차</div>
+    <ol>
+      <li><a href="#s1">프로젝트 개요</a></li>
+      <li><a href="#s2">목표 및 성과 지표</a></li>
+      <li><a href="#s3">타겟 사용자</a></li>
+      <li><a href="#s4">페이지 구성 및 섹션</a></li>
+      <li><a href="#s5">콘텐츠 전략</a></li>
+      <li><a href="#s6">기능 요구사항</a></li>
+      <li><a href="#s7">기술 스택 및 제약사항</a></li>
+      <li><a href="#s8">디자인 가이드</a></li>
+      <li><a href="#s9">개발 로드맵</a></li>
+      <li><a href="#s10">미결 사항</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. 개요 -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>프로젝트 개요</h2>
+    </div>
+
+    <p>AI 활용이 막막한 직장인에게 실무에서 바로 적용 가능한 AI 협업 방법을 소개하고, 업무 생산성을 높이며 창의적인 일에 집중하는 즐거움을 제공하는 <strong>개인 브랜딩 랜딩 페이지</strong>입니다.</p>
+
+    <h3>핵심 포지셔닝</h3>
+    <p>"AI를 잘 아는 사람"이 아닌, <strong>AI를 실무에 바로 붙여 생산성을 올리는 사람</strong>으로 포지셔닝합니다.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">문제 정의</div>
+        <h4>AI 활용의 막막함</h4>
+        <p>챗GPT를 알지만 실제 업무에 연결하지 못하는 직장인들의 불편함 해소</p>
+      </div>
+      <div class="card">
+        <div class="card-label">솔루션</div>
+        <h4>실무형 AI 협업 콘텐츠</h4>
+        <p>이론이 아닌 바로 써먹을 수 있는 실전 활용법과 워크플로우 제공</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 목표 -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>목표 및 성과 지표</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>지표</th>
+          <th>목표값</th>
+          <th>측정 방법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>전환율</strong></td>
+          <td>구글 폼 링크 클릭률</td>
+          <td>방문자 대비 15% 이상</td>
+          <td>UTM 파라미터 추적</td>
+        </tr>
+        <tr>
+          <td><strong>체류 시간</strong></td>
+          <td>평균 페이지 체류 시간</td>
+          <td>2분 30초 이상</td>
+          <td>Google Analytics</td>
+        </tr>
+        <tr>
+          <td><strong>스크롤 깊이</strong></td>
+          <td>CTA 섹션 도달률</td>
+          <td>방문자 50% 이상</td>
+          <td>Scroll Depth 이벤트</td>
+        </tr>
+        <tr>
+          <td><strong>이탈률</strong></td>
+          <td>첫 화면 이탈률</td>
+          <td>40% 미만</td>
+          <td>Bounce Rate 측정</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3. 타겟 사용자 -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>타겟 사용자</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Primary User</div>
+        <h4>AI 입문 직장인</h4>
+        <p>AI를 써야 한다는 건 알지만 어디서부터 시작해야 할지 모르는 3~10년차 직장인</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Secondary User</div>
+        <h4>생산성 향상 희망자</h4>
+        <p>반복 업무에 시간을 빼앗기고, AI로 효율을 높이고 싶은 팀장급 직장인</p>
+      </div>
+    </div>
+
+    <h3>사용자 페인 포인트</h3>
+    <ul class="styled">
+      <li>AI를 써봤지만 실무에 맞게 활용하지 못해 포기한 경험</li>
+      <li>회의록 정리, 이메일 작성 등 반복 업무로 하루를 소진</li>
+      <li>AI를 잘 쓰는 동료와의 생산성 격차에 대한 불안감</li>
+      <li>복잡한 기술 설명 없이 바로 적용 가능한 가이드 부재</li>
+    </ul>
+  </div>
+
+  <!-- 4. 페이지 구성 -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>페이지 구성 및 섹션</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>섹션명</th>
+          <th>목적</th>
+          <th>우선순위</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>히어로 (Hero)</strong></td>
+          <td>핵심 메시지 전달, 첫인상 형성</td>
+          <td><span class="priority p-high"><span class="priority-dot"></span> 필수</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>문제 공감 (Problem)</strong></td>
+          <td>방문자 고민 공감, 신뢰 형성</td>
+          <td><span class="priority p-high"><span class="priority-dot"></span> 필수</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>콘텐츠 소개 (Content)</strong></td>
+          <td>3가지 주제 소개, 가치 전달</td>
+          <td><span class="priority p-high"><span class="priority-dot"></span> 필수</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>워크플로우 (Workflow)</strong></td>
+          <td>AI 활용 5단계 시각화</td>
+          <td><span class="priority p-mid"><span class="priority-dot"></span> 권장</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>혜택 (Benefit)</strong></td>
+          <td>기대 성과 구체화, 전환 유도</td>
+          <td><span class="priority p-high"><span class="priority-dot"></span> 필수</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>CTA (Call to Action)</strong></td>
+          <td>구글 폼 링크 연결, 전환 달성</td>
+          <td><span class="priority p-high"><span class="priority-dot"></span> 필수</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>푸터 (Footer)</strong></td>
+          <td>브랜드 정보, 네비게이션</td>
+          <td><span class="priority p-low"><span class="priority-dot"></span> 일반</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. 콘텐츠 전략 -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>콘텐츠 전략</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>주제</th>
+          <th>핵심 메시지</th>
+          <th>타겟 감정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">주제 1</span><br><strong>AI로 일하는 방식이 달라지는가</strong></td>
+          <td>막막함은 줄이고, 일은 더 빠르고 똑똑하게</td>
+          <td>공감, 호기심 유발</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">주제 2</span><br><strong>직장인을 위한 실무형 AI 협업법</strong></td>
+          <td>이론이 아니라 바로 써먹는 실전 활용</td>
+          <td>신뢰, 실용성 강조</td>
+        </tr>
+        <tr>
+          <td><span class="tag purple">주제 3</span><br><strong>더 창의적으로 일하는 사람의 브랜드</strong></td>
+          <td>생산성 향상을 넘어, 더 가치 있는 일에 집중</td>
+          <td>영감, 열망 자극</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>실무 활용 키워드 (Hero 섹션 칩)</h3>
+    <span class="tag">회의록 자동 정리</span>
+    <span class="tag">이메일 초안 작성</span>
+    <span class="tag">보고서 요약</span>
+    <span class="tag">업무 기획 지원</span>
+    <span class="tag green">자료 조사 자동화</span>
+    <span class="tag green">문서 검토 및 수정</span>
+  </div>
+
+  <!-- 6. 기능 요구사항 -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>기능 요구사항</h2>
+    </div>
+
+    <h3>네비게이션</h3>
+    <ul class="styled">
+      <li>Fixed 상단 네비게이션바 (스크롤 시 배경 블러 처리)</li>
+      <li>각 섹션 앵커 링크 연결 (smooth scroll)</li>
+      <li>CTA 버튼 → 추후 구글 폼 URL로 교체 예정</li>
+    </ul>
+
+    <h3>인터랙션 및 애니메이션</h3>
+    <ul class="styled">
+      <li>스크롤 진입 시 섹션별 Fade-up 애니메이션 (IntersectionObserver)</li>
+      <li>Hero 섹션 요소 순차적 등장 애니메이션 (animation-delay)</li>
+      <li>카드 Hover 시 elevation 효과 (translateY + shadow)</li>
+      <li>워크플로우 아이콘 Hover 시 색상 전환 효과</li>
+    </ul>
+
+    <h3>CTA 버튼</h3>
+    <div class="notice">
+      <p>📌 현재 CTA 버튼은 임시 alert()로 처리되어 있습니다. 구글 폼 링크 확정 후 href 속성에 URL 삽입 필요.</p>
+    </div>
+    <ul class="styled">
+      <li>Hero 섹션 → "무료로 시작하기" 버튼</li>
+      <li>네비게이션 → "무료로 시작하기" 버튼</li>
+      <li>CTA 섹션 → "무료 뉴스레터 구독하기" 버튼</li>
+    </ul>
+  </div>
+
+  <!-- 7. 기술 스택 -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>기술 스택 및 제약사항</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>구분</th><th>내용</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>마크업</td><td>HTML5</td><td>시맨틱 태그 활용</td></tr>
+        <tr><td>스타일</td><td>CSS3 (CSS Variables, Flexbox, Grid)</td><td>외부 프레임워크 불사용</td></tr>
+        <tr><td>스크립트</td><td>Vanilla JavaScript (ES6+)</td><td>라이브러리 미사용</td></tr>
+        <tr><td>폰트</td><td>Pretendard (Google Fonts CDN)</td><td>한글 최적화 폰트</td></tr>
+        <tr><td>타겟 환경</td><td>데스크탑 웹 (1280px 이상 기준)</td><td>모바일 대응은 추후 고려</td></tr>
+        <tr><td>배포</td><td>단일 HTML 파일</td><td>별도 빌드 과정 없음</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8. 디자인 가이드 -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>디자인 가이드</h2>
+    </div>
+
+    <p>토스(Toss) 스타일의 밝고 신뢰감 있는 톤앤매너를 기준으로 합니다.</p>
+
+    <h3>컬러 팔레트</h3>
+    <table>
+      <thead><tr><th>역할</th><th>색상명</th><th>Hex</th></tr></thead>
+      <tbody>
+        <tr><td>Primary</td><td>Blue</td><td>#3182F6</td></tr>
+        <tr><td>Primary Dark</td><td>Blue Dark</td><td>#1B64DA</td></tr>
+        <tr><td>Primary Light</td><td>Blue Light</td><td>#EBF3FF</td></tr>
+        <tr><td>Text Primary</td><td>Gray 900</td><td>#191F28</td></tr>
+        <tr><td>Text Secondary</td><td>Gray 500</td><td>#6B7684</td></tr>
+        <tr><td>Background</td><td>Gray 50</td><td>#F9FAFB</td></tr>
+        <tr><td>Accent 1</td><td>Green</td><td>#00C471</td></tr>
+        <tr><td>Accent 2</td><td>Purple</td><td>#8B5CF6</td></tr>
+        <tr><td>Dark BG</td><td>Navy</td><td>#0A1628</td></tr>
+      </tbody>
+    </table>
+
+    <h3>타이포그래피</h3>
+    <table>
+      <thead><tr><th>용도</th><th>크기</th><th>굵기</th></tr></thead>
+      <tbody>
+        <tr><td>Hero Title</td><td>clamp(40px, 6vw, 72px)</td><td>900 (Black)</td></tr>
+        <tr><td>Section Title</td><td>clamp(28px, 4vw, 44px)</td><td>800 (ExtraBold)</td></tr>
+        <tr><td>Card Title</td><td>18~22px</td><td>700~800</td></tr>
+        <tr><td>Body</td><td>15~17px</td><td>400 (Regular)</td></tr>
+        <tr><td>Label/Badge</td><td>11~13px</td><td>600~700</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 9. 로드맵 -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <h2>개발 로드맵</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 1 · 완료</div>
+        <div class="timeline-title">랜딩 페이지 초안 구현</div>
+        <div class="timeline-desc">HTML/CSS/JS 단일 파일 구현, 전체 섹션 레이아웃 완성, 애니메이션 적용</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 2 · 예정</div>
+        <div class="timeline-title">구글 폼 연결</div>
+        <div class="timeline-desc">CTA 버튼에 구글 폼 URL 연결, 전환 추적을 위한 이벤트 태그 삽입</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 3 · 예정</div>
+        <div class="timeline-title">콘텐츠 업데이트 및 SEO 최적화</div>
+        <div class="timeline-desc">메타태그 및 OG 태그 작성, 실제 콘텐츠로 텍스트 교체, Google Analytics 설치</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 4 · 고려</div>
+        <div class="timeline-title">모바일 반응형 대응</div>
+        <div class="timeline-desc">모바일 뷰포트 레이아웃 조정, 터치 인터랙션 최적화</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. 미결 사항 -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <h2>미결 사항</h2>
+    </div>
+
+    <table>
+      <thead><tr><th>항목</th><th>내용</th><th>담당</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>구글 폼 URL</strong></td>
+          <td>CTA 버튼에 연결할 구글 폼 링크 생성 필요</td>
+          <td>작성자</td>
+          <td><span class="tag orange">미완료</span></td>
+        </tr>
+        <tr>
+          <td><strong>브랜드명</strong></td>
+          <td>현재 "AIWork"로 임시 사용 중, 최종 확정 필요</td>
+          <td>작성자</td>
+          <td><span class="tag orange">검토 중</span></td>
+        </tr>
+        <tr>
+          <td><strong>도메인/호스팅</strong></td>
+          <td>실제 배포를 위한 도메인 및 호스팅 환경 결정</td>
+          <td>작성자</td>
+          <td><span class="tag orange">미결</span></td>
+        </tr>
+        <tr>
+          <td><strong>Analytics</strong></td>
+          <td>Google Analytics 또는 유사 도구 설치 여부</td>
+          <td>작성자</td>
+          <td><span class="tag orange">미결</span></td>
+        </tr>
+        <tr>
+          <td><strong>SNS 링크</strong></td>
+          <td>푸터에 추가할 소셜미디어 계정 링크</td>
+          <td>작성자</td>
+          <td><span class="tag orange">미결</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
