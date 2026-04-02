@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* 기본 설정 및 Noto Sans KR 폰트 적용 */
+/* 기본 초기화 */
 * {
     margin: 0;
     padding: 0;
@@ -11,116 +11,128 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #fff;
     padding: 80px 0;
+    line-height: 1.2;
 }
 
+/* 전체 컨테이너 너비 설정 */
 .container {
-    max-width: 1100px;
+    width: 1140px; /* 요청하신 1140px 고정 */
     margin: 0 auto;
 }
 
 /* 헤더 스타일 */
 .header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .title {
-    font-size: 38px;
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 15px;
     letter-spacing: 1px;
-    color: #333;
 }
 
 .description {
     font-size: 16px;
     color: #666;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .sns-icons {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 15px;
 }
 
-/* 메인 레이아웃 영역 */
+.icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.fb { background-color: #3b5998; }
+.ig { background-color: #a06b52; }
+.blog { background-color: #2db400; font-size: 11px; }
+.tw { background-color: #00aced; }
+
+/* 메인 레이아웃 영역 (Flexbox) */
 .main-content {
     display: flex;
-    gap: 20px;
-    padding: 0 20px;
-    /* 전체 높이를 고정하여 자식 컬럼들이 이 높이를 100% 채우게 함 */
-    height: 580px; 
+    gap: 20px; /* 컬럼 간 간격 */
+    height: 600px; /* 전체 높이 균형을 맞추기 위한 고정값 */
 }
 
-/* 컬럼 공통 스타일 */
+/* 컬럼별 비율 설정 */
 .column {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* 박스 사이 간격 */
+    gap: 20px; /* 박스 간 간격 */
     height: 100%;
 }
 
-.col-left { flex: 1; }
-.col-mid { flex: 1.2; }
-.col-right { flex: 1; }
+.col-left { flex: 1; }      /* 왼쪽 컬럼 */
+.col-mid { flex: 1.2; }    /* 가운데 컬럼 (약간 더 넓게) */
+.col-right { flex: 1; }     /* 오른쪽 컬럼 */
 
-/* 공통 박스 스타일 */
+/* 공통 박스 기본 스타일 */
 .box {
     border: 1px solid #ddd;
-    padding: 25px;
     background-color: #fff;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
-/* 박스별 세로 높이 비율 설정 (높이를 맞추는 핵심 로직) */
+/* 박스별 높이 비율 조정 (컬럼 간 높이 합계를 일치시킴) */
 .box-sns { height: 100%; }
 
-/* 가운데 컬럼: 홍보영상(2) + 고객문의(1) = 총합 3 */
 .box-promo { flex: 2; }
 .box-inquiry { flex: 1; }
 
-/* 오른쪽 컬럼: 나눔(1) + 공지(1) + 몰(1) = 총합 3 */
-/* 각 컬럼의 flex 합계를 맞춰주면 전체 높이가 정확히 일치하게 됩니다. */
-.box-sharing { flex: 1; }
-.box-notice { flex: 1; }
-.box-mall { flex: 1; }
+.box-sharing, .box-notice, .box-mall { flex: 1; }
 
 /* 박스 내부 텍스트 및 버튼 */
 .box-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
+    color: #222;
     margin-bottom: 12px;
 }
 
 .box-text {
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
     line-height: 1.5;
-    flex-grow: 1; /* 텍스트가 공간을 차지하여 버튼을 아래로 밀어냄 */
+    flex-grow: 1; /* 내용을 밀어내어 버튼을 하단에 위치시킴 */
 }
 
 .btn-more {
     display: inline-block;
     background-color: #ff6600;
     color: #fff;
-    padding: 7px 18px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     width: fit-content;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-/* 마우스 호버 시 각각 다른 색상 변경 */
-.box-sns:hover { background-color: #f0f2f5; border-color: #3b5998; }
-.box-promo:hover { background-color: #fffaf0; border-color: #ffcc00; }
-.box-inquiry:hover { background-color: #f0f7ff; border-color: #007bff; }
-.box-sharing:hover { background-color: #fff0f5; border-color: #ff69b4; }
-.box-notice:hover { background-color: #f8f9fa; border-color: #666; }
-.box-mall:hover { background-color: #f0fff0; border-color: #28a745; }
+/* ======= 호버 시 배경색 변경 (각기 다른 파스텔톤) ======= */
+.box-sns:hover { background-color: #f8f9fa; border-color: #ccc; }
+.box-promo:hover { background-color: #fffdf2; border-color: #ffe066; }
+.box-inquiry:hover { background-color: #f2faff; border-color: #74c0fc; }
+.box-sharing:hover { background-color: #fff5f8; border-color: #ff87b4; }
+.box-notice:hover { background-color: #f7f7f7; border-color: #adb5bd; }
+.box-mall:hover { background-color: #f2fff2; border-color: #63e6be; }
