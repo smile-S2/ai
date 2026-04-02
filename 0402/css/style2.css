@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+/* 1. 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    background-color: #fff;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 2. 레이아웃: 메인 배너 섹션 */
+.main-banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 850px;
+    /* 배경 이미지: bg_about.jpg */
+    background: url('../images/bg_about.jpg') no-repeat center center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* 카드들을 하단에 배치 */
+    padding-bottom: 120px; /* 하단 여백 */
+}
+
+/* 3. ★ 핵심: 1280px 고정 컨테이너 ★ */
+.inner {
+    width: 1280px; /* 명확한 가로 사이즈 지정 */
+    margin: 0 auto; /* 좌우 중앙 정렬 */
+    padding: 0 20px; /* 양 끝 최소 여백 (필요시 조정 가능) */
+}
+
+/* 4. 상단 메인 텍스트 */
+.banner-text {
+    margin-bottom: 60px;
+}
+
+.banner-text h1 {
+    color: #fff;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 5. 카드 컨테이너 (Flexbox) */
+.card-container {
+    display: flex;
+    gap: 30px; /* 카드 사이 간격 */
+}
+
+/* 6. 개별 카드 스타일 */
+.card {
+    flex: 1; /* 1280px 안에서 3등분으로 균등 배분 */
+    background: #fff;
+    border-radius: 16px; /* 첫 번째 이미지 스타일처럼 직각형태 유지 혹은 아주 살짝 라운드 */
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    /* 카드 전체 전환 효과 */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 7. 카드 이미지 영역 */
+.img-box {
+    width: 100%;
+    height: 220px; /* 이미지 높이 고정 */
+    overflow: hidden;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* 부드러운 확대 애니메이션 */
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 8. 카드 텍스트 영역 */
+.text-box {
+    padding: 22px 0;
+    text-align: center;
+    background-color: #fff;
+    border-top: 1px solid #eee; /* 구분선 */
+}
+
+.text-box span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* --- 9. 마우스 호버(Hover) 인터랙션 --- */
+
+/* 카드 전체: 위로 부드럽게 들림 */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* ★ 이미지 확대 효과: 요청하신 1.1~1.2배 (1.15배 적용) ★ */
+.card:hover .img-box img {
+    transform: scale(1.15);
+}
+
+/* 10. 반응형 (1280px보다 작아질 때) */
+@media (max-width: 1300px) {
+    .inner {
+        width: 100%;
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+    }
+    .main-banner {
+        height: auto;
+        padding-top: 100px;
+    }
+}
