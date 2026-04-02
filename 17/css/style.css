@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Pretandard';
+}
+
+body h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form{
+    width: 600px;
+    margin: 0 auto 50px;
+}
+
+fieldset{
+    border: 1px solid blue;
+    padding: 20px;
+    background-color: aliceblue;
+    margin-bottom: 20px;
+}
+
+fieldset legend{
+    text-align: center;
+}
+
+ol li{
+    list-style: none;
+    margin-bottom: 8px;
+}
+
+ol li input[type="text"], input[type="password"]{
+    width: 410px;
+    height: 60px;
+    padding-left: 16px;
+    border: 1px solid #c5ccde;
+    border-radius: 16px;
+}
+
+ol li .idbox{
+    margin-left: 69px;
+}
+
+form input[type="submit"], input[type="reset"]{
+    cursor: pointer;
+    background-color: aliceblue;
+    border: 1px solid blue;
+    border-radius: 999px;
+    padding: 8px;
+    width: 100px;
+    height: 30px;
+}
+
+ul li{
+    list-style: none;
+    margin-bottom: 16px;
+}
+
+input[type="radio"] {
+    /* 기본 브라우저 스타일 제거 */
+    appearance: none;
+    -webkit-appearance: none;
+    
+    /* 라디오 버튼 크기 및 테두리 설정 */
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    
+    /* 내부 점(indicator)을 중앙에 배치하기 위한 설정 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+/* 마우스를 올렸을 때 테두리 색상 변경 */
+input[type="radio"]:hover {
+    border-color: #007bff;
+}
+
+/* 체크되었을 때 스타일 */
+input[type="radio"]:checked {
+    border-color: #007bff;
+}
+
+/* 체크되었을 때 나타날 내부 점(가상 요소) */
+input[type="radio"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+ul li textarea{
+    border: 1px solid #007bff;
+}
