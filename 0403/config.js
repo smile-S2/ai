@@ -5,7 +5,7 @@
    ② Apps Script 설정 방법은 README.md 를 참고하세요.
 ================================================================= */
 
-window.SHEET_URL = 'https://script.google.com/macros/s/AKfycbxtNH35y00VOibCAn1zE-lGTuVrU_EW2K9UXFT9_rU8YDPIG9Buc_fnvzicKgAey06Z/exec';
+window.SHEET_URL = 'https://script.google.com/macros/s/AKfycbyaYo3njQmRDtTo9e9UbNcf3qYqzC9BhKo_eEhvfnjxNiHTICUAGGGZxJDG4MibADSv/exec';
 
 /*
   [예시]
