@@ -19,11 +19,9 @@
             <div class="digit" id="s1">0</div>
             <div class="digit" id="s2">0</div>
         </div>
-        <p>회원님이 보다 빠르게 정답을 찾을 수 있도록 <span> 초록 검색창을 띄워두세요!</span></p>
     </div>
 
     <div class="container">
-        <p class="quest">Q. 3월 13일 문제 : 커넥츠에서 등업을 하려면 어떤 신청을 해야 할까요?<br>(힌트 : 000신청 / 3글자)</p>
         <form action="" method="POST">
             <div class="first-line">
             <div class="gift">
@@ -84,17 +82,42 @@
             </div>
             </div>
             <div class="input">
-            <fieldset>
-                <input type="text" name="text" id="text" placeholder="전달할 메시지를 입력하세요.">
-            </fieldset>
+                <input type="button" name="submit" id="openModalBtn" value="응모하기" class="submit">
             </div>
-                    <div class="input">
-        <input type="submit" name="submit" id="submit" value="응모하기">
-        </div>
         </form>
 
     </div>
+    <div id="modalContainer" class="modal-overlay">
+  <div class="modal-content">
+    <h3>이벤트 응모 정보 입력</h3>
+    <p>경품 발송을 위해 정확한 정보를 입력해주세요.</p>
+    
+    <form id="entryForm">
+      <div class="input-group">
+        <label for="userName">이름</label>
+        <input type="text" id="userName" placeholder="성함을 입력하세요" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="userEmail">이메일</label>
+        <input type="email" id="userEmail" placeholder="example@mail.com" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="userPhone">연락처</label>
+        <input type="tel" id="userPhone" placeholder="010-0000-0000" required>
+      </div>
 
+      <div class="modal-buttons">
+        <button type="button" id="closeModal" class="btn-secondary">취소</button>
+        <button type="submit" class="btn-primary">제출하기</button>
+      </div>
+    </form>
+  </div>
+</div>
     <script src="./script/script.js"></script>
 </body>
 </html>
+
+
+
