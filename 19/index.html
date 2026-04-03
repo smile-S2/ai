@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h2>매일 밤 <span>10시</span> 이벤트가 시작됩니다!</h2>
+        <div class="timer-wrap">
+            <div class="digit" id="h1">0</div>
+            <div class="digit" id="h2">0</div>
+            <span class="colon">:</span>
+            <div class="digit" id="m1">0</div>
+            <div class="digit" id="m2">0</div>
+            <span class="colon">:</span>
+            <div class="digit" id="s1">0</div>
+            <div class="digit" id="s2">0</div>
+        </div>
+        <p>회원님이 보다 빠르게 정답을 찾을 수 있도록 <span> 초록 검색창을 띄워두세요!</span></p>
+    </div>
+
+    <div class="container">
+        <p class="quest">Q. 3월 13일 문제 : 커넥츠에서 등업을 하려면 어떤 신청을 해야 할까요?<br>(힌트 : 000신청 / 3글자)</p>
+        <form action="" method="POST">
+            <div class="first-line">
+            <div class="gift">
+                <p>소니 미러리스 A5000</p>
+                <img src="./images/image1.png" alt="camera">
+                <p><span>3</span>개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="camera" value="camera">
+                </fieldset>
+            </div>
+            <div class="gift">
+                <p>신라호텔 더 파크뷰 식사권 2인</p>
+                <img src="./images/image2.png" alt="invite">
+                <p><span>0</span> 개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="dinner" value="dinner">
+                </fieldset>
+            </div>
+            <div class="gift">
+                <p>외장하드 1TB</p>
+                <img src="./images/image3.png" alt="hard">
+                <p><span>10</span> 개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="hard" value="hard">
+                </fieldset>
+            </div>
+            </div>
+            <div class="second-line">
+                <div class="gift">
+                <p>라미 만년필</p>
+                <img src="./images/image4.png" alt="pen">
+                <p><span>3</span> 개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="pen" value="pen">
+                </fieldset>
+            </div>
+            <div class="gift">
+                <p>백화점 상품권 1만원</p>
+                <img src="./images/image5.png" alt="coupon">
+                <p><span>20</span> 개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="giftcard" value="giftcard">
+                </fieldset>
+            </div>
+            <div class="gift">
+                <p>바나나맛 우유</p>
+                <img src="./images/image6.png" alt="milk">
+                <p><span>100</span> 개 남음</p>
+                <hr>
+                <fieldset>
+                    <input type="radio" name="choice" id="milk" value="milk">
+                </fieldset>
+            </div>
+            </div>
+            <div class="input">
+            <fieldset>
+                <input type="text" name="text" id="text" placeholder="정답을 입력하세요.">
+            </fieldset>
+            </div>
+                    <div class="input">
+        <input type="submit" name="submit" id="submit" value="응모하기">
+        </div>
+        </form>
+
+    </div>
+
+    <script src="./script/script.js"></script>
+</body>
+</html>
