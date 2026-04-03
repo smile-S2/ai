@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Pretendard', "맑은 고딕";
+    padding: 50px;
+}
+
+body h1{
+    margin-bottom: 40px;
+}
+
+form fieldset{
+    width: 700px;
+    margin-bottom: 40px;
+    padding: 40px;
+    border: 1px solid salmon;
+}
+
+form fieldset legend{
+    color: saddlebrown;
+}
+
+ul li{
+    list-style: none;
+    margin-bottom: 16px;
+    background-color: aliceblue;
+    padding: 8px;
+}
+
+fieldset button{
+    cursor: pointer;
+    width: 100px;
+    height: 60px;
+    border: none;
+    border-radius: 4px;
+    background-color: aliceblue;
+    color: #333;
+}
+
+fieldset button:hover{
+    background-color: #c3d3e0;
+}
