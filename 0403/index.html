@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>매일 밤 10시 이벤트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / COUNTDOWN ===== -->
+  <section class="hero">
+    <h1 class="hero-title">매일 밤 <strong>10시</strong> 이벤트가 시작됩니다!</h1>
+
+    <div class="countdown" id="countdown">
+      <div class="digit-block" id="h1">1</div>
+      <div class="digit-block" id="h2">1</div>
+      <span class="sep">:</span>
+      <div class="digit-block" id="m1">1</div>
+      <div class="digit-block" id="m2">1</div>
+      <span class="sep">:</span>
+      <div class="digit-block" id="s1">1</div>
+      <div class="digit-block" id="s2">1</div>
+    </div>
+
+    <div class="search-bar-row">
+      <span class="search-label">회원님이 보다 빠르게 정답을 찾을 수 있도록</span>
+      <div class="search-select-wrap">
+        <select class="search-select" id="searchBook">
+          <option value="">초록 검색창을 띄워두세요!</option>
+          <option value="naver">네이버 검색</option>
+          <option value="google">구글 검색</option>
+          <option value="daum">다음 검색</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ + PRIZES ===== -->
+  <section class="quiz-section">
+    <p class="quiz-question">
+      Q. 3월 13일 문제 : 커넥츠에서 등업을 하려면 어떤 신청을 해야 할까요?<br />
+      <span class="quiz-hint">(힌트 : 000신청 / 3글자)</span>
+    </p>
+
+    <div class="prize-grid" id="prizeGrid">
+      <!-- cards injected by JS -->
+    </div>
+
+    <div class="answer-row">
+      <label class="answer-label">정답:</label>
+      <input type="text" class="answer-input" id="answerInput" placeholder="키워드까지 정확하게 입력해 주세요." />
+    </div>
+
+    <button class="submit-btn" id="submitBtn">응모하기</button>
+  </section>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h2 class="modal-title">응모 정보 입력</h2>
+      <p class="modal-desc">정확한 정보를 입력하시면 당첨 시 연락드립니다.</p>
+
+      <div class="form-group">
+        <label class="form-label">이름 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="inputName" placeholder="홍길동" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">이메일 <span class="required">*</span></label>
+        <input type="email" class="form-input" id="inputEmail" placeholder="example@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">전화번호 <span class="required">*</span></label>
+        <input type="tel" class="form-input" id="inputPhone" placeholder="010-0000-0000" />
+      </div>
+
+      <div class="modal-status" id="modalStatus"></div>
+
+      <button class="modal-submit-btn" id="modalSubmitBtn">제출하기</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
