@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.test1{
+    filter: blur(10px);
+}
+
+.test2{
+    filter: brightness(200%); /* 기본값 100% */
+}
+
+.test3{
+    filter: grayscale(100%); /* 완전 흑백은 100% */
+}
+
+.test4{
+    filter: drop-shadow(10px 10px 5px #333);
+    /* x y blur color 순으로 작성 */
+}
+
+.test5{
+    filter: saturate(200%); /* 100% 원본 */
+}
+
+.test6{
+    filter: invert(200%);
+}
