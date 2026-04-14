@@ -4,21 +4,28 @@
 
 /* header */
     header {
-      width: 1200px;
+      width: 100%;
       height: 150px;
       margin: 0 auto;
       background: #ffffff;
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
       padding: 0; /* 왼쪽 딱 붙이기 */
       border-bottom: 1px solid #eee;
       position: relative;
     }
 
+    .header-inner{
+      width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .header-left {
       width: 350px;
-      flex: 0 0 350px;
+      justify-content: left;
     }
 
     .search-box {
@@ -90,6 +97,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      justify-content: right;
       gap: 20px;
     }
 
@@ -152,24 +160,33 @@
     /* footer */
     footer {
       margin-top: 20px;
-      width: 1200px;
+      width: 100%;
       min-height: 200px;
       margin-left: auto;
       margin-right: auto;
       background: #ffffff;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: flex-start;
-      padding: 46px 16px 38px;
+      padding: 46px 20px;
       color: #767676;
     }
 
     .footer-left {
       width: 320px;
     }
+
 footer {
   border-top: 1px solid #E5E5E5;
 }
+
+.footer-inner{
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
     .footer-right {
       width: 760px;
       display: flex;
