@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>뚜무리 청마늘 파스타 - 상품 상세</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    /* ── 전체 래퍼 ── */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    /* ══════════════════════════════
+       1. 상품 정보 섹션
+    ══════════════════════════════ */
+    .product-info-section {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    /* 상품 이미지 */
+    .product-image-wrap {
+      flex: 0 0 auto;
+      width: 260px;
+    }
+
+    .product-image-wrap img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* 상품 텍스트 정보 */
+    .product-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 8px;
+    }
+
+    .product-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .product-subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* 가격 영역 */
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .discount-rate {
+      font-size: 20px;
+      font-weight: 800;
+      color: #e53e3e;
+    }
+
+    .price-current {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .price-original {
+      font-size: 12px;
+      color: #aaa;
+      text-decoration: line-through;
+      margin-bottom: 24px;
+    }
+
+    /* 구분선 */
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+
+    /* 수량 선택 */
+    .qty-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .qty-label {
+      font-size: 13px;
+      color: #444;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      background: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: #e8e8e8;
+    }
+
+    .qty-num {
+      width: 36px;
+      height: 28px;
+      text-align: center;
+      font-size: 13px;
+      border: none;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      background: #fff;
+      color: #222;
+      outline: none;
+    }
+
+    /* 총 상품 금액 */
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total-label {
+      font-size: 13px;
+      color: #444;
+    }
+
+    .total-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    /* ══════════════════════════════
+       2. 리뷰 배너
+    ══════════════════════════════ */
+    .review-banner {
+      background: #e8f5e2;
+      border-radius: 8px;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #2d6a1c;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .review-banner .star {
+      color: #f5a623;
+      margin-right: 4px;
+    }
+
+    /* 두 번째 연초록 바 */
+    .green-bar {
+      background: #e8f5e2;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 32px;
+      min-height: 48px;
+    }
+
+    /* ══════════════════════════════
+       3. 이미지 플레이스홀더 블록들
+    ══════════════════════════════ */
+    .image-block {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .image-block--lavender {
+      background: #d9d8f0;
+      height: 880px;
+    }
+
+    .image-block--peach {
+      background: #f7dfc4;
+      height: 480px;
+    }
+
+    .image-block--mint {
+      background: #c5f0e0;
+      height: 880px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+  <!-- ① 상품 정보 -->
+  <section class="product-info-section">
+    <div class="product-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=520&q=80"
+        alt="뚜무리 청마늘 파스타"
+      />
+    </div>
+
+    <div class="product-text">
+      <h1 class="product-title">뚜무리 청마늘 파스타</h1>
+      <p class="product-subtitle">
+        플이넌 이작인 뚜무리와 쥐마늘이의 환상의 공연<br>
+        플이넌 이작인 뚜무리와 쥐마늘이의 환상의 공연
+      </p>
+
+      <div class="price-row">
+        <span class="discount-rate">7%</span>
+        <span class="price-current">12,800원</span>
+      </div>
+      <p class="price-original">13,800원</p>
+
+      <hr class="divider" />
+
+      <div class="qty-row">
+        <span class="qty-label">상품 수량</span>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-num" type="text" id="qty" value="1" readonly />
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="total-row">
+        <span class="total-label">총 상품 금액</span>
+        <span class="total-price" id="totalPrice">12,800원</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② 리뷰 배너 -->
+  <div class="review-banner">
+    <span class="star">★</span> 4.9 634 고객님이 인증한 변한
+  </div>
+
+  <!-- ③ 두 번째 녹색 바 -->
+  <div class="green-bar"></div>
+
+  <!-- ④ 상세 이미지 플레이스홀더 블록들 -->
+  <div class="image-block image-block--lavender"></div>
+  <div class="image-block image-block--peach"></div>
+  <div class="image-block image-block--mint"></div>
+
+</div>
+
+<script>
+  const unitPrice = 12800;
+
+  function changeQty(delta) {
+    const input = document.getElementById('qty');
+    let val = parseInt(input.value) + delta;
+    if (val < 1) val = 1;
+    input.value = val;
+    document.getElementById('totalPrice').textContent =
+      (val * unitPrice).toLocaleString('ko-KR') + '원';
+  }
+</script>
+</body>
+</html>
