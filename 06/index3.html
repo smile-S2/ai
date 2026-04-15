@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if문 제3형식</title>
+</head>
+<body>
+    <script>
+        // if문 제3형식: 다중 if / if(조건식){참일 때 실행}else if(조건식){참일 때 실행}else if(조건식){참일 때 실행}else{거짓일 때 실행}
+
+        // 외부로부터 데이터를 받아 국어점수, 영어점수, 수학점수, 컴퓨터점수 / 총점과 평균을 구하고 평균이 90점 이상인 경우 "수", 80점 이상일 경우 "우", 70점 이상이면 "미", 60점 이상이면 "양", 60점 미만은 "가" 가 나오도록 하는 명령문
+        let kor = prompt("국어점수를 입력하세요.");
+        let eng = prompt("영어점수를 입력하세요.");
+        let mat = prompt("수학점수를 입력하세요.");
+        let com = prompt("컴퓨터점수를 입력하세요."); // 폼은 숫자도 문자 데이터로 인식한다 > Number(변수명) 함수를 사용해야 한다
+
+        // 총점 구하기
+        let total = Number(kor) + Number(eng) + Number(mat) + Number(com); 
+        document.write(`국어점수는 ${kor}<br>`);
+        document.write(`영어점수는 ${eng}<br>`);
+        document.write(`수학점수는 ${mat}<br>`);
+        document.write(`컴퓨터점수는 ${com}<br>`);
+        document.write(`총점은 ${total}<br>`)
+
+        // 평균 구하기
+        let avg = total/4;
+        document.write(`평균은 ${avg}<br>`);
+
+        // 평가 출력
+        let remark = ""; // let 중복을 막기 위해 한번만 선언 
+        if(avg>=90){
+            remark = "수"
+        }else if(avg>=80){
+            remark = "우"
+        }else if(avg>=70){
+            remark = "미"
+        }else if(avg>=60){
+            remark = "양"
+        }else{
+            remark = "가"
+        }
+        document.write(`평점은 ${remark}<br>`);
+    </script>
+</body>
+</html>

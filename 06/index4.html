@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if문 응용문제</title>
+</head>
+<body>
+    <script>
+        // 1번 나이 판단
+        let age = prompt("나이를 입력하세요.")
+        if(age>=20){
+            alert("성인입니다.")
+        }else{
+            alert("미성년자입니다.")
+        }
+
+        // 2번 숫자 판단
+        let number = prompt("숫자를 입력하세요.")
+        if(number>0){
+            document.write(`${number}는 양수입니다.`)
+        }else if(number==0){
+            document.write(`${number}는 0입니다.`)
+        }else{
+            document.write(`${number}는 음수입니다.`)
+            
+        }
+
+        document.write("<br><hr>");
+
+        // 3번
+        let kor = prompt("국어점수를 입력하세요.");
+        let eng = prompt("영어점수를 입력하세요.");
+        let mat = prompt("수학점수를 입력하세요.");
+        let com = prompt("컴퓨터점수를 입력하세요."); // 폼은 숫자도 문자 데이터로 인식한다 > Number(변수명) 함수를 사용해야 한다
+
+        // 총점 구하기
+        let total = Number(kor) + Number(eng) + Number(mat) + Number(com); 
+        document.write(`국어점수는 ${kor}<br>`);
+        document.write(`영어점수는 ${eng}<br>`);
+        document.write(`수학점수는 ${mat}<br>`);
+        document.write(`컴퓨터점수는 ${com}<br>`);
+        document.write(`총점은 ${total}<br>`)
+
+        // 평균 구하기
+        let avg = total/4;
+        document.write(`평균은 ${avg}<br>`);
+        
+        let remark = ""; // let 중복을 막기 위해 한번만 선언 
+        if(avg>=90){
+            remark = "수"
+        }else if(avg>=80){
+            remark = "우"
+        }else if(avg>=70){
+            remark = "미"
+        }else if(avg>=60){
+            remark = "양"
+        }else{
+            remark = "가"
+        }
+        document.write(`평점은 ${remark}<br>`);
+
+        document.write("<hr>")
+
+        let mark = "";
+        if(avg>=95){
+            mark = "A+"
+        }else if(avg>=90){
+            mark = "A"
+        }else if(avg>=85){
+            mark = "B+"
+        }else if(avg>=80){
+            mark = "B"
+        }else if(avg>=75){
+            mark = "C+"
+        }else if(avg>=70){
+            mark = "C"
+        }else if(avg>=65){
+            mark = "D+"
+        }else if(avg>=60){
+            mark = "D"
+        }else{
+            mark = "F"
+        }
+        document.write(`학점은 ${mark}<br>`);
+    </script>
+</body>
+</html>
