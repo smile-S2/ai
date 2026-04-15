@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* pc 기기 */
+.wrap{
+    width: 100%;
+}
+
+.wrap .blue{
+    position: absolute; /* 공중에 띄우기 */
+    left: 0; /* 위치 지정 */
+    top: 0;
+    width: 100px;
+    height: 300px;
+    background-color: blue;
+}
+
+.wrap .red{
+    width: 100%;
+    height: 300px;
+    background-color: red;
+}
+
+.wrap .green{
+    position: absolute; /* 공중에 띄워 빨간 박스 위에 배치 */
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 300px;
+    background-color: green;
+}
+
+
+/* 노트북기기 */
+@media (min-width:992px) and (max-width:1119px){
+    .wrap .green{
+        position: static;
+        width: 100%;
+    }
+}
+
+/* 태블릿기기 - 항상 pc 를 기준으로 바뀐 부분만 입력 */
+@media (min-width:768px) and (max-width:991px){
+    .wrap .blue{
+        position: static;
+        width: 100%;
+    }
+
+    .wrap .green{
+        position: static;
+        width: 100%;
+    }
+}
+
+/* 모바일기기*/
+@media (min-width:320px) and (max-width:767px) {
+    .wrap .red{
+        height: 600px;
+    }
+
+    .wrap .blue{
+        position: static;
+        width: 100%;
+        height: 600px;
+    }
+
+    .wrap .green{
+        position: static;
+        width: 100%;
+        height: 600px;
+    }
+}

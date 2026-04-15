@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* PC 기기 */
+.wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.wrap .red{
+    width: 100%;
+    height: 150px;
+    background-color: red;
+}
+
+.low-wrap{
+    display: flex;
+}
+
+.low-wrap .blue{
+    width: 50%;
+    height: 120px;
+    background-color: blue;
+}
+
+.low-wrap .green{
+    width: 50%;
+    height: 120px;
+    background-color: green;
+}
+
+
+/* notebook - 해상도를 적어주어야 함(노트북 기준 해상도) */ 
+@media ( min-width: 992px ) and ( max-width: 1119px ) {
+    body{
+        padding: 0 24px;
+    }
+
+    .wrap{
+        width: 100%;
+    }
+}
+
+
+/* Tablet 단위값이 겹치면 작동하지 않는다 */
+@media (min-width:768px) and (max-width:991px) {
+    .wrap{
+        width: 100%;
+    }
+
+    .wrap .red{
+        height: 300px;
+    }
+
+    .low-wrap .blue{
+        height: 300px;
+    }
+
+    .low-wrap .green{
+        height: 300px;
+    }
+}
+
+@media (min-width: 320px) and (max-width:767px) {
+    .wrap {
+        width: 100%;
+    }
+
+    .wrap .red{
+        height: 300px;
+    }
+
+    .low-wrap{
+        display: block;
+    }
+
+    .low-wrap .blue{
+        width: 100%;
+        height: 300px;
+    }
+    
+    .low-wrap .green{
+        width: 100%;
+        height: 300px;
+    }
+}

@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrap-title {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.blue {
+    position: absolute;
+    width: 100px;
+    height: 600px;
+    background-color: blue;
+}
+
+.red {
+    width: 1000px;
+    height: 300px;
+    background-color: red;
+}
+
+.green {
+    width: 1000px;
+    height: 300px;
+    background-color: green;
+}
+
+/* 노트북기기 */
+@media (min-width:992px) and (max-width:1119px){
+    .wrap-title{
+        padding: 0 30px;
+    }
+}
+
+/* 태블릿기기 - 항상 pc 를 기준으로 바뀐 부분만 입력 */
+@media (min-width:768px) and (max-width:991px){
+    .wraptitle{
+        width: 100%;
+    }
+
+    .blue {
+        width: 100%;
+        height: 50%;
+        position: static;
+    }
+}
+
+/* 모바일기기*/
+@media (min-width:320px) and (max-width:767px) {
+    
+    .red{
+        width: 100%;
+        height: 600px;
+    }
+
+    .blue{
+        position: static;
+        width: 100%;
+        height: 50%;
+    }
+
+    .green{
+        width: 100%;
+        height: 600px;
+    }
+}
