@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "쭈꾸미 풋마늘 파스타",
+        "script": "푹 익혀서 먹기 편해요",
+        "price": 13000,
+        "img": "./images/banchan1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "미역줄기볶음",
+        "script": "바다의 채소 미역줄기",
+        "price": 2800,
+        "img": "./images/banchan2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "브로콜리 두부무침",
+        "script": "브로콜리를 담백한 두부에 버무렸어요",
+        "price": 3800,
+        "img": "./images/banchan3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "매콤 콩나물무침",
+        "script": "참깨기름으로 아삭하게",
+        "price": 3300,
+        "img": "./images/banchan4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "새콤달콤 도라지무침",
+        "script": "달큰한 도라지와 오이를 새콤하게",
+        "price": 5800,
+        "img": "./images/banchan5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "감자채볶음",
+        "script": "고소하면서 담백한 감자채볶음",
+        "price": 2800,
+        "img": "./images/banchan6.jpg"
+    },
+    {
+        "id": 7,
+        "name": "느타리버섯볶음",
+        "script": "담백한 버섯 특유의 향미가 일품",
+        "price": 3800,
+        "img": "./images/banchan7.jpg"
+    },
+    {
+        "id": 8,
+        "name": "알감자조림",
+        "script": "한입에 쏙 맛있는 알감자조림",
+        "price": 5800,
+        "img": "./images/banchan8.jpg"
+    }
+]
