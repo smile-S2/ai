@@ -41,24 +41,25 @@
             color: #fff;
         }
 
-        /* 컨트롤 영역 (좌측 버튼) */
+        /* 2. 좌측 하단 버튼 영역 (24px 상향 조정) */
         .controls-bottom-left {
             position: absolute;
-            bottom: 30px;
+            bottom: 54px; /* 기존 30px + 24px */
             left: 50px;
             display: flex;
             gap: 10px;
             z-index: 100;
         }
 
-        /* 컨트롤 영역 (우측 카운터) */
+        /* 3. 우측 하단 카운터 영역 (24px 상향 조정) */
         .controls-bottom-right {
             position: absolute;
-            bottom: 30px;
+            bottom: 54px; /* 기존 30px + 24px */
             right: 50px;
             z-index: 100;
         }
 
+        /* 컨트롤 공통 디자인 */
         .nav-btn {
             width: 45px;
             height: 45px;
@@ -73,8 +74,16 @@
             transition: all 0.2s ease;
         }
 
-        .nav-btn:hover { background-color: #fff; transform: scale(1.05); }
-        .nav-btn .icon { font-size: 18px; color: #333; font-weight: bold; }
+        .nav-btn:hover {
+            background-color: #fff;
+            transform: scale(1.05);
+        }
+
+        .nav-btn .icon {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
 
         .slider-counter {
             font-family: 'Pretendard', sans-serif;
