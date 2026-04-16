@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품상세화면</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/sub.css">
+</head>
+<body>
+
+    <!-- header 영역 -->
+    <header>
+      <div class="header-inner">
+      <div class="header-left">
+        <div class="search-box">
+          <input type="text" placeholder="반찬을 입력해주세요" />
+          <div class="search-btn">
+            <img src="./img/logo/imgi_25_icon-search-f5f5f5-18 1.png" alt="검색">
+          </div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="logo-placeholder">
+            <a href="index3.html">
+        <img src="./img/logo/imgi_13_logo_pc.svg" alt="로고"></a>
+      </div>
+      </div>
+
+      <div class="header-right">
+        <div class="top-links">
+          <span>로그인</span>
+          <span>회원가입</span>
+          <span>내정보</span>
+        </div>
+        <div class="menu-links">
+          <div class="menu-item"><span class="icon"><img src="./img/logo/imgi_28_icon-tel2.svg" alt="전화"></span><span>전화주문</span></div>
+          <div class="menu-item"><span class="icon"><img src="./img/logo/imgi_29_icon-document-d4d4d4-28.svg" alt="브랜드"></span><span>브랜드</span></div>
+          <div class="menu-item"><span class="icon"><img src="./img/logo/imgi_30_icon-list-d4d4d4-28.svg" alt="반찬보기"></span><span>반찬보기</span></div>
+          <div class="menu-item"><span class="icon"><img src="./img/logo/imgi_31_icon-cart-d4d4d4-28.svg" alt="장바구니"></span><span>장바구니</span></div>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <!-- 메인 영역 -->
+<div class="main-wrapper">
+ 
+  <!-- ① 상품 정보 -->
+  <section class="product-info-section">
+    <div class="product-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=520&q=80"
+        alt="뚜무리 청마늘 파스타"
+      />
+    </div>
+ 
+    <div class="product-text">
+      <h1 class="product-title">메추리알 간장조림</h1>
+      <p class="product-subtitle">
+        동그란 메추리알과 짭조름한 간장의 조화
+      </p>
+ 
+      <div class="price-row">
+        <span class="discount-rate">7%</span>
+        <span class="price-current">12,800원</span>
+      </div>
+      <p class="price-original">13,800원</p>
+ 
+      <hr class="divider" />
+ 
+      <div class="qty-row">
+        <span class="qty-label">상품 수량</span>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-num" type="text" id="qty" value="1" readonly />
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+ 
+      <hr class="divider" />
+ 
+      <div class="total-row">
+        <span class="total-label">총 상품 금액</span>
+        <span class="total-price" id="totalPrice">12,800원</span>
+      </div>
+      <div class="buybtn">
+      <button>장바구니 담기</button>
+    </div>
+    </div>
+
+    
+
+  </section>
+ 
+  <!-- ② 리뷰 배너 -->
+  <div class="review-banner">
+    <span class="star">★</span> 4.9 6396명 고객님이 인증한 반찬
+  </div>
+
+  <!-- ★ 탭 네비게이션 추가 위치 -->
+<nav class="tab-nav">
+  <a href="#" class="tab-item active">반찬설명</a>
+  <a href="#table" class="tab-item">상품정보</a>
+  <a href="#review" class="tab-item"><span class="tab-badge">6396</span>
+    상품후기
+  </a>
+</nav>
+ 
+  <!-- ③ 두 번째 녹색 바 -->
+  <div class="green-bar"></div>
+ 
+  <!-- ④ 상세 이미지 플레이스홀더 블록들 -->
+  <div class="image-block image-block--lavender">
+    <div class="detail">
+      <img src="img/detail2.jpg" alt="상세페이지">
+      <div class="detail-text">
+      <h1>메추리알 간장조림 110g</h1>
+      <h3>한 입에 쏙들어가는 동글동글 메추리알</h3>
+      <p>한 입에 쏙 들어가 아이들이 먹기 좋은 메추리알 간장조림이에요. 집반찬연구소 맛간장에 간이 충분히 스며들도록 조렸어요. <br>밥 먹기 싫어하는 아이들도 메추리알 간장조림만 있으면 밥 한 그릇 뚝딱 한다니까요.</p></div>
+      <hr>
+      <h1>담음새</h1>
+      <img src="img/detail.jpg" alt="상세페이지">
+      <div class="detail-about">
+        <table class="product-info-table" id="table">
+    <tr><td class="info-label">제품명</td><td class="info-value">메추리알 간장조림</td></tr>
+    <tr><td class="info-label">용량</td><td class="info-value">110g</td></tr>
+    <tr><td class="info-label">유동기한</td><td class="info-value">제조일로부터 냉장 7일</td></tr>
+    <tr><td class="info-label">원재료명 및 함량</td><td class="info-value">메추리알59.4%(국내산),정제수,집반찬연구소 맛간장3.1%...</td></tr>
+    <tr><td class="info-label">보관방법(처급방법)</td><td class="info-value">0~10℃ 냉장보관</td></tr>
+    <tr><td class="info-label">식품의 유형</td><td class="info-value">조림류</td></tr>
+    <tr><td class="info-label">포장재질</td><td class="info-value">용기(PP), 실링(PE)</td></tr>
+    <tr><td class="info-label">제조원 및 판매원</td><td class="info-value">집반찬연구소/인천광역시 시구 가서로 26(가좌동)</td></tr>
+    <tr><td class="info-label">알레르기식품</td><td class="info-value">본 제품은 게,새우,고등어,땅콩,우유,메밀,돼지고기,복숭아,토마토,잣,닭고기,조개류(전복,홍합 포함),오징어,소고기를 사용한 제품과 같은 제조 시설에서 제조하고 있습니다.</td></tr>
+    <tr><td class="info-label">부정/불량식품 신고표시</td><td class="info-value">불량 부정식품 신고번호는 국번없이 1399</td></tr>
+    <tr><td class="info-label">소비자분쟁해결기준</td><td class="info-value">본 제품은 공정거래위원회 고시 소비자분쟁해결기준에 의거 교환 또는 환불 보상받으실 수 있습니다.</td></tr>
+    <tr><td class="info-label">소비자 상담실</td><td class="info-value">1588-3754</td></tr>
+    <tr><td class="info-label">품목보고번호</td><td class="info-value">20010193033144</td></tr>
+  </table>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="image-block image-block--peach">
+    <div class="another-title">
+      <h1>같이 먹으면 더 맛있는 반찬</h1>
+      <p>이 반찬을 보신 다른 고객님이 같이 담은 반찬이에요!</p>
+    </div>
+    
+    <div class="another-card">
+    <div class="another-card1">
+      <img src="img/2/imgi_183_1339_ZIP_P_0088_T.jpg" alt="">
+      <h5>한우 무볶음</h5>
+      <p>달달한 무와 짭조름한 한우의 조합</p>
+      <h5>9,900원</h5>
+    </div>
+    <div class="another-card2">
+      <img src="img/2/imgi_184_1379_ZIP_P_1049_T_RE.jpg" alt="">
+      <h5>한우 무볶음</h5>
+      <p>달달한 무와 짭조름한 한우의 조합</p>
+      <h5>9,900원</h5>
+    </div>
+    <div class="another-card3">
+      <img src="img/2/imgi_185_1337_ZIP_P_0090_T.jpg" alt="">
+      <h5>한우 무볶음</h5>
+      <p>달달한 무와 짭조름한 한우의 조합</p>
+      <h5>9,900원</h5>
+    </div>
+    <div class="another-card4">
+      <img src="img/2/imgi_186_1352_ZIP_P_0106_T_RE.jpg" alt="">
+      <h5>한우 무볶음</h5>
+      <p>달달한 무와 짭조름한 한우의 조합</p>
+      <h5>9,900원</h5>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+  <div class="image-block image-block--mint">
+
+    <div class="review" id="review">
+      <h1>상품후기</h1>
+      <div class="review-img-wrap">
+
+        <img src="./img/3/1422_ZIP_P_5150_T.jpg" alt="리뷰이미지">
+        <img src="img/3/31_ZIP_P_5001_T.jpg" alt="리뷰이미지">
+        <img src="img/3/36_ZIP_P_5003_T.jpg" alt="리뷰이미지">
+        <img src="img/3/71_ZIP_P_6001_T.jpg" alt="리뷰이미지">
+        <img src="img/3/723_ZIP_P_5068_T.jpg" alt="리뷰이미지">
+        <img src="img/3/723_ZIP_P_5068_T.jpg" alt="리뷰이미지">
+
+      </div>
+
+      <section class="review-section">
+
+  <!-- 리뷰 아이템 반복 -->
+  <div class="review-item">
+    <img class="review-img" src="img/3/36_ZIP_P_5003_T.jpg" alt="리뷰 이미지" />
+  <div class="review-wrap">
+    <div class="review-top">
+      
+      <span class="reviewer-name">장*춘</span>
+      <span class="purchase-count">4회 구매</span>
+      <span class="stars">🍀🍀🍀🍀</span>
+    </div>
+    <p class="review-date">2026.04.11</p>
+    <p class="review-text">가장 난난한 반 찬으로 아이들이 가장 좋아해요.</p>
+  </div>
+  </div>
+
+  <div class="review-item">
+    <img class="review-img" src="./img/3/31_ZIP_P_5001_T.jpg" alt="리뷰 이미지" />
+    <div class="review-wrap">
+    <div class="review-top">
+      
+      <span class="reviewer-name">조*방</span>
+      <span class="purchase-count">16회 구매</span>
+      <span class="stars">🍀🍀🍀🍀</span>
+    </div>
+    <p class="review-date">2026.04.10</p>
+    <p class="review-text">백퍼 실 받이고 대번 살 먹구앉았나니 ~</p></div>
+  </div>
+
+  <!-- 더보기 버튼 -->
+  <div class="review-more-wrap">
+    <button class="review-more-btn">더보기 ∨</button>
+  </div>
+
+</section>
+    </div>
+
+  </div>
+ 
+</div>
+
+    <!-- footer 영역 -->
+    <footer>
+      <div class="footer-inner">
+      <div class="footer-left">
+        <p class="footer-title">고객센터</p>
+        <p class="footer-phone">1588-3754</p>
+        <p class="footer-email">zipbanchan@sannamchon.co.kr</p>
+        <p class="footer-time">평일 08:30~17:30 / 토요일 08:30~12:00</p>
+        <p class="footer-break">점심시간 12:00~13:00</p>
+        <p class="footer-holiday">일요일, 공휴일은 휴무입니다.</p>
+      </div>
+
+      <div class="footer-right">
+        <p class="footer-company-name">집반찬연구소</p>
+        <p class="footer-company-info">인천광역시 서구 가석로 26(가좌동) 집반찬연구소&nbsp;&nbsp;&nbsp;대표자 : 박종철</p>
+        <p class="footer-company-info">사업자등록번호 : 121-86-17743&nbsp;&nbsp;&nbsp;통신판매업 신고번호 : 제 2023-인천서구-3834 호&nbsp;&nbsp;&nbsp;개인정보보호책임자 : 정문채</p>
+        <p class="footer-company-info footer-contact">제휴 문의 : zipbanchan@sannamchon.co.kr</p>
+        <div class="footer-links">
+          <a href="#">집반찬연구소 소개</a>
+          <span>|</span>
+          <a href="#">이용약관</a>
+          <span>|</span>
+          <a href="#">개인정보처리방침</a>
+        </div>
+        <p class="footer-copy">Copyright © SANNAMCHON CORP. All Rights Reserved.</p>
+      </div>
+    </div>
+    </footer>
+
+    <script>
+  const unitPrice = 12800;
+ 
+  function changeQty(delta) {
+    const input = document.getElementById('qty');
+    let val = parseInt(input.value) + delta;
+    if (val < 1) val = 1;
+    input.value = val;
+    document.getElementById('totalPrice').textContent =
+      (val * unitPrice).toLocaleString('ko-KR') + '원';
+  }
+</script>
+  </body>
+</html>
