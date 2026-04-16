@@ -1,0 +1,81 @@
+/* 1. 슬라이더 메인 컨테이너 */
+.main-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.slider-wrapper {
+    display: flex;
+    width: 500%; /* 이미지 5개 기준 */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+}
+
+/* 2. 우측 하단 컨트롤 박스 (버튼 + 카운터) */
+.controls-bottom-right {
+    position: absolute;
+    bottom: 30px;  /* 하단 여백 */
+    right: 50px;   /* 우측 여백 (이 부분을 수정했습니다) */
+    display: flex;
+    align-items: center;
+    gap: 15px;     /* 버튼과 숫자 사이 간격 */
+    z-index: 100;
+}
+
+/* 원형 버튼 스타일 */
+.nav-btn {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+.nav-btn .icon {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 숫자형 카운터 스타일 */
+.slider-counter {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 4px 12px;
+    border-radius: 20px;
+    min-width: 40px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+}

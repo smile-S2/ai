@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>무한 루프 메인 비주얼 슬라이더</title>
+    <style>
+        body { margin: 0; padding: 0; }
+
+        .main-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1920px;
+            height: 480px;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            /* 초기 위치는 클론된 마지막 이미지 다음인 진짜 1번이어야 함 */
+            transform: translateX(-100%);
+        }
+
+        .slide {
+            flex: 0 0 100%; /* 각 슬라이드가 컨테이너 너비를 100% 차지 */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        /* 컨트롤 영역 (좌측 버튼) */
+        .controls-bottom-left {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        /* 컨트롤 영역 (우측 카운터) */
+        .controls-bottom-right {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { background-color: #fff; transform: scale(1.05); }
+        .nav-btn .icon { font-size: 18px; color: #333; font-weight: bold; }
+
+        .slider-counter {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 30px;
+            min-width: 50px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-slider-container">
+    <div class="slider-wrapper" id="sliderWrapper">
+        <div class="slide" style="background-color: #f3e5f5;">슬라이드 5 (Clone)</div>
+        
+        <div class="slide" style="background-color: #e8f5e9;">슬라이드 1</div>
+        <div class="slide" style="background-color: #e3f2fd;">슬라이드 2</div>
+        <div class="slide" style="background-color: #fff3e0;">슬라이드 3</div>
+        <div class="slide" style="background-color: #fce4ec;">슬라이드 4</div>
+        <div class="slide" style="background-color: #f3e5f5;">슬라이드 5</div>
+
+        <div class="slide" style="background-color: #e8f5e9;">슬라이드 1 (Clone)</div>
+    </div>
+
+    <div class="controls-bottom-left">
+        <button class="nav-btn" id="prevBtn"><span class="icon">&#10094;</span></button>
+        <button class="nav-btn" id="nextBtn"><span class="icon">&#10095;</span></button>
+    </div>
+
+    <div class="controls-bottom-right">
+        <div class="slider-counter" id="sliderCounter">1 / 5</div>
+    </div>
+</div>
+
+<script>
+    const wrapper = document.getElementById('sliderWrapper');
+    const counter = document.getElementById('sliderCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 1; // 클론 때문에 1번 인덱스부터 시작
+    const totalSlides = 5; 
+    let isTransitioning = false;
+
+    // 슬라이더 이동 함수
+    function moveSlider(index, hasAnimation = true) {
+        if (hasAnimation) {
+            wrapper.style.transition = 'transform 0.5s ease-in-out';
+        } else {
+            wrapper.style.transition = 'none';
+        }
+        wrapper.style.transform = `translateX(-${index * 100}%)`;
+        updateCounter(index);
+    }
+
+    // 카운터 숫자 업데이트 (클론 인덱스 보정)
+    function updateCounter(index) {
+        let displayIndex = index;
+        if (index === 0) displayIndex = totalSlides;
+        else if (index === totalSlides + 1) displayIndex = 1;
+        counter.textContent = `${displayIndex} / ${totalSlides}`;
+    }
+
+    // 무한 루프 핵심: 애니메이션 끝난 후 눈속임 이동
+    wrapper.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        if (currentIndex === totalSlides + 1) {
+            currentIndex = 1;
+            moveSlider(currentIndex, false);
+        } else if (currentIndex === 0) {
+            currentIndex = totalSlides;
+            moveSlider(currentIndex, false);
+        }
+    });
+
+    function next() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        moveSlider(currentIndex);
+    }
+
+    function prev() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
+        moveSlider(currentIndex);
+    }
+
+    nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+    prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+
+    // 자동 재생
+    let timer = setInterval(next, 4000);
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(next, 4000);
+    }
+</script>
+
+</body>
+</html>

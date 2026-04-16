@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>무한 루프 메인 비주얼 슬라이더</title>
+    <style>
+        body { margin: 0; padding: 0; }
+
+        .main-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1920px;
+            height: 480px;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            /* 초기 위치는 클론된 마지막 이미지 다음인 진짜 1번이어야 함 */
+            transform: translateX(-100%);
+        }
+
+        .slide {
+            flex: 0 0 100%; /* 각 슬라이드가 컨테이너 너비를 100% 차지 */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        /* 컨트롤 영역 (좌측 버튼) */
+        .controls-bottom-left {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        /* 컨트롤 영역 (우측 카운터) */
+        .controls-bottom-right {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { background-color: #fff; transform: scale(1.05); }
+        .nav-btn .icon { font-size: 18px; color: #333; font-weight: bold; }
+
+        .slider-counter {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 30px;
+            min-width: 50px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 카드 슬라이더 컨테이너 */
+.card-slider-container {
+    position: relative;
+    width: 1200px;
+    margin: 60px auto; /* 위아래 여백 */
+    overflow: hidden;
+}
+
+.card-slider-wrapper {
+    display: flex;
+    gap: 16px; /* 카드 사이 간격 */
+    transition: transform 0.4s ease-out;
+    will-change: transform;
+}
+
+/* 카드 아이템 (1200px 내에서 4개가 보이고 gap 16px를 제외한 너비) */
+.card-item {
+    flex: 0 0 calc((100% - (16px * 3)) / 4);
+    box-sizing: border-box;
+}
+
+.card-content {
+    height: 400px; /* 카드 높이 임시 설정 */
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 카드 슬라이더 컨테이너 */
+.card-slider-container {
+    position: relative;
+    width: 1200px;
+    margin: 60px auto;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.card-slider-wrapper {
+    display: flex;
+    gap: 16px;
+    /* 초기 위치: 클론 4개 너비만큼 밀어둠 */
+    transform: translateX(0); 
+}
+
+.card-item {
+    flex: 0 0 calc((100% - (16px * 3)) / 4);
+    box-sizing: border-box;
+}
+
+.card-content {
+    height: 380px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.card-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-prev { left: 10px; }
+.c-next { right: 10px; }
+
+.card-nav-btn:hover {
+    background-color: #ffffff;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* 버튼이 없을 때 비활성화 스타일 (선택사항) */
+.card-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+    </style>
+</head>
+<body>
+
+<div class="main-slider-container">
+    <div class="slider-wrapper" id="sliderWrapper">
+        <div class="slide" style="background: url(./imges/banner5.png)"></div>
+        
+        <div class="slide" style="background: url(./imges/banner1.png);"></div>
+        <div class="slide" style="background: url(./imges/banner2.png)"></div>
+        <div class="slide" style="background: url(./imges/banner3.png);"></div>
+        <div class="slide" style="background: url(./imges/banner4.png)"></div>
+        <div class="slide" style="background: url(./imges/banner5.png)"></div>
+
+        <div class="slide" style="background: url(./imges/banner1.png);"></div>
+    </div>
+
+    <div class="controls-bottom-left">
+        <button class="nav-btn" id="prevBtn"><span class="icon">&#10094;</span></button>
+        <button class="nav-btn" id="nextBtn"><span class="icon">&#10095;</span></button>
+    </div>
+
+    <div class="controls-bottom-right">
+        <div class="slider-counter" id="sliderCounter">1 / 5</div>
+    </div>
+</div>
+
+<div class="card-slider-container">
+    <div class="card-slider-wrapper" id="cardWrapper">
+        <div class="card-item"><div class="card-content">카드 5</div></div>
+        <div class="card-item"><div class="card-content">카드 6</div></div>
+        <div class="card-item"><div class="card-content">카드 7</div></div>
+        <div class="card-item"><div class="card-content">카드 8</div></div>
+
+        <div class="card-item"><div class="card-content">카드 1</div></div>
+        <div class="card-item"><div class="card-content">카드 2</div></div>
+        <div class="card-item"><div class="card-content">카드 3</div></div>
+        <div class="card-item"><div class="card-content">카드 4</div></div>
+        <div class="card-item"><div class="card-content">카드 5</div></div>
+        <div class="card-item"><div class="card-content">카드 6</div></div>
+        <div class="card-item"><div class="card-content">카드 7</div></div>
+        <div class="card-item"><div class="card-content">카드 8</div></div>
+
+        <div class="card-item"><div class="card-content">카드 1</div></div>
+        <div class="card-item"><div class="card-content">카드 2</div></div>
+        <div class="card-item"><div class="card-content">카드 3</div></div>
+        <div class="card-item"><div class="card-content">카드 4</div></div>
+    </div>
+
+    <button class="card-nav-btn c-prev" id="cardPrevBtn">&#10094;</button>
+    <button class="card-nav-btn c-next" id="cardNextBtn">&#10095;</button>
+</div>
+
+<script>
+    const wrapper = document.getElementById('sliderWrapper');
+    const counter = document.getElementById('sliderCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 1; // 클론 때문에 1번 인덱스부터 시작
+    const totalSlides = 5; 
+    let isTransitioning = false;
+
+    // 슬라이더 이동 함수
+    function moveSlider(index, hasAnimation = true) {
+        if (hasAnimation) {
+            wrapper.style.transition = 'transform 0.5s ease-in-out';
+        } else {
+            wrapper.style.transition = 'none';
+        }
+        wrapper.style.transform = `translateX(-${index * 100}%)`;
+        updateCounter(index);
+    }
+
+    // 카운터 숫자 업데이트 (클론 인덱스 보정)
+    function updateCounter(index) {
+        let displayIndex = index;
+        if (index === 0) displayIndex = totalSlides;
+        else if (index === totalSlides + 1) displayIndex = 1;
+        counter.textContent = `${displayIndex} / ${totalSlides}`;
+    }
+
+    // 무한 루프 핵심: 애니메이션 끝난 후 눈속임 이동
+    wrapper.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        if (currentIndex === totalSlides + 1) {
+            currentIndex = 1;
+            moveSlider(currentIndex, false);
+        } else if (currentIndex === 0) {
+            currentIndex = totalSlides;
+            moveSlider(currentIndex, false);
+        }
+    });
+
+    function next() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        moveSlider(currentIndex);
+    }
+
+    function prev() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
+        moveSlider(currentIndex);
+    }
+
+    nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+    prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+
+    // 자동 재생
+    let timer = setInterval(next, 4000);
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(next, 4000);
+    }
+
+const cardWrapper = document.getElementById('cardWrapper');
+const cPrevBtn = document.getElementById('cardPrevBtn');
+const cNextBtn = document.getElementById('cardNextBtn');
+
+const totalRealCards = 8; // 실제 카드 수
+const showCount = 4; // 한 번에 보이는 수
+let cardIdx = showCount; // 앞에 클론이 4개 있으므로 index 4부터 시작
+let isCardMoving = false;
+
+function getUnitWidth() {
+    const card = document.querySelector('.card-item');
+    return card.getBoundingClientRect().width + 16; // 카드너비 + 간격
+}
+
+// 초기 위치 세팅 (애니메이션 없이 진짜 1번 카드로 이동)
+cardWrapper.style.transform = `translateX(-${cardIdx * getUnitWidth()}px)`;
+
+function moveCardSlider(hasAni = true) {
+    cardWrapper.style.transition = hasAni ? 'transform 0.4s ease-out' : 'none';
+    cardWrapper.style.transform = `translateX(-${cardIdx * getUnitWidth()}px)`;
+}
+
+cardWrapper.addEventListener('transitionend', () => {
+    isCardMoving = false;
+    
+    // 오른쪽 끝(클론 1번)에 도달하면 진짜 1번으로 순간이동
+    if (cardIdx >= totalRealCards + showCount) {
+        cardIdx = showCount;
+        moveCardSlider(false);
+    }
+    // 왼쪽 끝(클론 8번)에 도달하면 진짜 8번으로 순간이동
+    if (cardIdx <= 0) {
+        cardIdx = totalRealCards;
+        moveCardSlider(false);
+    }
+});
+
+cNextBtn.addEventListener('click', () => {
+    if (isCardMoving) return;
+    isCardMoving = true;
+    cardIdx++;
+    moveCardSlider();
+});
+
+cPrevBtn.addEventListener('click', () => {
+    if (isCardMoving) return;
+    isCardMoving = true;
+    cardIdx--;
+    moveCardSlider();
+});
+
+// 화면 크기 변경 시 위치 재보정
+window.addEventListener('resize', () => {
+    moveCardSlider(false);
+});
+</script>
+
+</body>
+</html>
